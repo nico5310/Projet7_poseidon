@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
@@ -17,6 +17,40 @@
 			<!--
 			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
 			 -->
+			<div class="form-group">
+				<label for="curveId" class="col-form-label">Curve Id</label>
+				<div class="col-md-8">
+					<input type="text" class="form-control" id="curveId" placeholder="Curve Id"
+						   th:fields="*{curveId}">
+					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="term" class="col-form-label">Term</label>
+				<div class="col-md-8">
+					<input type="text" class="form-control" id="term" placeholder="Type"
+						   th:fields="*{term}">
+					<p class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{term}"></p>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="value" class="col-form-label">Value</label>
+				<div class="col-md-8">
+					<input type="text"class="form-control" id="value" placeholder="Value"
+						   th:fields="*{value}">
+					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
+				</div>
+			</div>
+			<!-- Buttons action -->
+			<div class="form-group">
+				<div class="col-md-8">
+					<input type="hidden" th:field="*{id}">
+					<a class="btn btn-danger" href="/curvePoint/list/">Cancel</a>
+					<input class="btn btn-primary" type="submit" value="Update CurvePoint">
+				</div>
+			</div>
 		</form>
 	</div>
 
