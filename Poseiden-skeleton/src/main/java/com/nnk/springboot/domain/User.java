@@ -1,20 +1,27 @@
 package com.nnk.springboot.domain;
 
+import lombok.extern.log4j.Log4j2;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Log4j2
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
     @NotBlank(message = "Username is mandatory")
     private String username;
+
     @NotBlank(message = "Password is mandatory")
     private String password;
+
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
+
     @NotBlank(message = "Role is mandatory")
     private String role;
 
