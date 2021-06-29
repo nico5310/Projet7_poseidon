@@ -1,11 +1,51 @@
 package com.nnk.springboot.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
+import lombok.extern.log4j.Log4j2;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+@Log4j2
 @Entity
 @Table(name = "rulename")
-public class RuleName {
+public class RuleName implements Serializable {
     // TODO: Map columns in data table RULENAME with corresponding java fields
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id ;
+
+    @NotNull(message = "Name not be null")
+    String name ;
+
+    @NotNull(message = "Description not be null")
+    String description ;
+
+    @NotNull(message = "Json not be null")
+    String json ;
+
+    @NotNull(message = "template not be null")
+    String template ;
+
+    @NotNull(message = "sqlStr not be null")
+    String sqlStr ;
+
+    @NotNull(message = "sqlPart not be null")
+    String sqlPart ;
+
+    public RuleName(Integer id, String name, String description, String json, String template, String sqlStr, String sqlPart) {
+
+        this.id          = id;
+        this.name        = name;
+        this.description = description;
+        this.json        = json;
+        this.template    = template;
+        this.sqlStr      = sqlStr;
+        this.sqlPart     = sqlPart;
+    }
+
+    public RuleName() {
+
+    }
 }
