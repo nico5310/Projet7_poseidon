@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Log4j2
@@ -23,7 +24,7 @@ public class BidListService {
         return "bidList/list";
     }
 
-    public void validate (BidList bid, Model model) {
+    public void validate (@Valid BidList bid, Model model) {
         log.info("Add new bid to bid List");
         bidListRepository.save(bid);
         model.addAttribute("bidList", bidListRepository.findAll());

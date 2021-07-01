@@ -1,40 +1,41 @@
 package com.nnk.springboot;
 
 import com.nnk.springboot.repositories.BidListRepository;
-import org.junit.runner.RunWith;
+import com.nnk.springboot.service.BidListService;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
-@RunWith(SpringRunner.class)
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
+@AutoConfigureMockMvc
 @SpringBootTest
 public class BidTests {
 
 	@Autowired
-	private BidListRepository bidListRepository;
+	BidListRepository bidListRepository;
 
-//	@Test
-//	public void bidListTest() {
-//		BidList bid = new BidList("Account Test", "Type Test", 10d);
-//
-//		// Save
-//		bid = bidListRepository.save(bid);
-//		Assert.assertNotNull(bid.getBidListId());
-//		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
-//
-//		// Update
-//		bid.setBidQuantity(20d);
-//		bid = bidListRepository.save(bid);
-//		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
-//
-//		// Find
-//		List<BidList> listResult = bidListRepository.findAll();
-//		Assert.assertTrue(listResult.size() > 0);
-//
-//		// Delete
-//		Integer id = bid.getBidListId();
-//		bidListRepository.delete(bid);
-//		Optional<BidList> bidList = bidListRepository.findById(id);
-//		Assert.assertFalse(bidList.isPresent());
-//	}
+	@Autowired
+	private BidListService bidListService;
+
+	@Autowired
+	MockMvc mockMvc;
+
+
+
+
+	@Test
+	@DisplayName("BidTests")
+	public void homeBidListTest() throws Exception {
+
+		mockMvc.perform(post("/bidList/validate").param("account", "form")).andExpect(status().is2xxSuccessful()).andExpect(model().attributeExists());
+
+	}
 }

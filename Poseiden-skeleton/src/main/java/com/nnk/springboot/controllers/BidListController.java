@@ -18,14 +18,12 @@ import javax.validation.Valid;
 @Controller
 public class BidListController {
 
-    // TODO: Inject Bid service
     @Autowired
     BidListService bidListService;
 
     // SHOW BID LIST HOMEPAGE
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        // TODO: call service find all bids to show to the view
         log.info("Show BidList page");
         bidListService.home(model);
         return "bidList/list";
@@ -33,17 +31,15 @@ public class BidListController {
 
     // ADD PAGE FORM
     @GetMapping("/bidList/add")
-    public String addBidForm(Model model) {
-        log.info("Add bid page");
-        BidList bid = new BidList();
-        model.addAttribute("bidList", bid);
+    public String addBidForm(BidList bid) {
+        log.info("Add bid page formulaire");
         return "bidList/add";
     }
 
     // SAVE NEW BID
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
+
         if (result.hasErrors()) {
             log.error("ERROR, Add new bid isn't possible");
             return "bidList/add";
@@ -56,17 +52,16 @@ public class BidListController {
     // UPDATE PAGE FORM
     @GetMapping("/bidList/update/{bidListId}")
     public String showUpdateForm(@PathVariable("bidListId") Integer bidListId, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
         log.info("Show Update form page by Id " + bidListId);
         bidListService.showUpdateForm(bidListId, model);
         return "bidList/update";
     }
 
+
     //UPDATE EXIST BID
     @PostMapping("/bidList/update/{bidListId}")
     public String updateBid(@PathVariable("bidListId") Integer bidListId, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
         if (result.hasErrors()) {
             log.error("ERROR, Update bid isn't possible");
             return "redirect:/bidList/update";
@@ -76,9 +71,9 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
+
     @GetMapping("/bidList/delete/{bidListId}")
     public String deleteBid(@PathVariable("bidListId") Integer bidListId, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
         log.info("SUCCESS, Delete bid with Id :" + bidListId);
         bidListService.deleteBid(bidListId, model);
         return "redirect:/bidList/list";

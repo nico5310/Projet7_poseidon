@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+@Log4j2
 @Controller
 public class UserController {
     @Autowired
@@ -22,6 +24,7 @@ public class UserController {
     @RequestMapping("/user/list")
     public String home(Model model)
     {
+        log.info("Home page of User/list");
         model.addAttribute("users", userRepository.findAll());
         return "user/list";
     }
