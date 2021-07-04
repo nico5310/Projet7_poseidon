@@ -1,6 +1,5 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import lombok.extern.log4j.Log4j2;

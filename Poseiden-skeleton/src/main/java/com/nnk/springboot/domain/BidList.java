@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "bidlist")
 public class BidList implements Serializable {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,33 +48,15 @@ public class BidList implements Serializable {
     private String sourceListId ;
     private String side ;
 
-    public BidList(Integer bidListId, String account, String type, Double bidQuantity, Double askQuantity, Double bid, Double ask, String benchmark, Timestamp bidListDate, String commentary, String security, String status, String trader, String book, String creationName, Timestamp creationDate, String revisionName, Timestamp revisionDate, String dealName, String dealType, String sourceListId, String side) {
+    public BidList(String account, String type, Double bidQuantity) {
 
-        this.bidListId    = bidListId;
-        this.account      = account;
-        this.type         = type;
-        this.bidQuantity  = bidQuantity;
-        this.askQuantity  = askQuantity;
-        this.bid          = bid;
-        this.ask          = ask;
-        this.benchmark    = benchmark;
-        this.bidListDate  = bidListDate;
-        this.commentary   = commentary;
-        this.security     = security;
-        this.status       = status;
-        this.trader       = trader;
-        this.book         = book;
-        this.creationName = creationName;
-        this.creationDate = creationDate;
-        this.revisionName = revisionName;
-        this.revisionDate = revisionDate;
-        this.dealName     = dealName;
-        this.dealType     = dealType;
-        this.sourceListId = sourceListId;
-        this.side         = side;
+        this.account     = account;
+        this.type        = type;
+        this.bidQuantity = bidQuantity;
     }
-
     public BidList() {
 
     }
+
+    public BidList(String account_test, String type_test, double v) {}
 }

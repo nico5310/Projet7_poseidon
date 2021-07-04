@@ -34,19 +34,17 @@ public class CurvePoint implements Serializable {
     Timestamp creationDate ;
 
 
-    public CurvePoint(Integer id, Integer curveId, Timestamp asOfDate, Double term, Double value, Timestamp creationDate) {
+    public CurvePoint( Integer curveId, Double term, Double value) {
 
-        this.id           = id;
         this.curveId      = curveId;
-        this.asOfDate     = asOfDate;
         this.term         = term;
         this.value        = value;
-        this.creationDate = creationDate;
-    }
+            }
 
     public CurvePoint() {
 
     }
 
 
+    public CurvePoint(int id, int curveId, int i, int i1, int i2, int i3) {}
 }

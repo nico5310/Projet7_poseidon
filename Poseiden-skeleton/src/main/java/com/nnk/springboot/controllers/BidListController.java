@@ -26,14 +26,14 @@ public class BidListController {
     public String home(Model model) {
         log.info("Show BidList page");
         bidListService.home(model);
-        return "bidList/list";
+        return "/bidList/list";
     }
 
     // ADD PAGE FORM
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
         log.info("Add bid page formulaire");
-        return "bidList/add";
+        return "/bidList/add";
     }
 
     // SAVE NEW BID

@@ -1,41 +1,47 @@
 package com.nnk.springboot;
 
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
-import com.nnk.springboot.service.BidListService;
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.junit4.SpringRunner;
 
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.List;
+import java.util.Optional;
 
-
-@AutoConfigureMockMvc
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class BidTests {
 
-	@Autowired
-	BidListRepository bidListRepository;
+    @Autowired
+    private BidListRepository bidListRepository;
 
-	@Autowired
-	private BidListService bidListService;
+    	@Test
+    	public void bidListTest() {
+    		BidList bid = new BidList("Account Test", "Type Test", 10.00);
 
-	@Autowired
-	MockMvc mockMvc;
+    		// Save
+    		bid = bidListRepository.save(bid);
+    		Assert.assertNotNull(bid.getBidListId());
+    		Assert.assertEquals(bid.getBidQuantity(), 10.00, 10.00);
 
+    		// Update
+    		bid.setBidQuantity(20d);
+    		bid = bidListRepository.save(bid);
+    		Assert.assertEquals(bid.getBidQuantity(), 20.00, 20.00);
 
+    		// Find
+    		List<BidList> listResult = bidListRepository.findAll();
+    		Assert.assertTrue(listResult.size() > 0);
 
-
-	@Test
-	@DisplayName("BidTests")
-	public void homeBidListTest() throws Exception {
-
-		mockMvc.perform(post("/bidList/validate").param("account", "form")).andExpect(status().is2xxSuccessful()).andExpect(model().attributeExists());
-
-	}
+    		// Delete
+    		Integer id = bid.getBidListId();
+    		bidListRepository.delete(bid);
+    		Optional<BidList> bidList = bidListRepository.findById(id);
+    		Assert.assertFalse(bidList.isPresent());
+    	}
 }

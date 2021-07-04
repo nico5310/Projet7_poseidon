@@ -1,8 +1,6 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +35,7 @@ public class CurvePointService {
         model.addAttribute("curvePoint", curvePoint);
     }
 
-    public void updateCurvePoint(Integer id, CurvePoint curvePoint, Model model) {
+    public void updateCurvePoint(Integer id, @Valid CurvePoint curvePoint, Model model) {
         log.info("Update exist curvePoint by id" + id);
         curvePoint.setId(id);
         curvePointRepository.save(curvePoint);

@@ -1,6 +1,5 @@
 package com.nnk.springboot.service;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import lombok.extern.log4j.Log4j2;

@@ -21,8 +21,7 @@ public class CurveController {
     CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         log.info("Get CurvePoints List");
         curvePointService.home(model);
         return "curvePoint/list";
@@ -30,9 +29,9 @@ public class CurveController {
 
     // ADD PAGE FORM
     @GetMapping("/curvePoint/add")
-    public String addBidForm(Model model) {
+    public String addCurvePointForm(CurvePoint curvePoint) {
         log.info("Add CurvePoint page formulaire");
-        return "curvePoint/add";
+        return "/curvePoint/add";
     }
 
     //SAVE NEW CURVEPOINT
