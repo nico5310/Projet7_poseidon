@@ -24,7 +24,9 @@
 					<div class="col-md-8">
 						<input type="text" class="form-control" id="account" placeholder="Account"
 							   th:fields="*{account}">
-						<p class="text-danger" th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('account')}"
+						   th:errors="*{account}">Error account
+						</p>
 					</div>
 				</div>
 
@@ -33,7 +35,9 @@
 					<div class="col-md-8">
 						<input type="text" class="form-control" id="type" placeholder="Type"
 							   th:fields="*{type}">
-						<p class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+						<p class="text-danger" th:if="${#fields.hasErrors('type')}"
+						   th:errors="*{type}">Error type
+						</p>
 					</div>
 				</div>
 
@@ -41,8 +45,9 @@
 					<label for="bidQuantity" class="col-form-label">Bid quantity</label>
 					<div class="col-md-8">
 						<input type="text" class="form-control" id="bidQuantity" placeholder="Bid quantity"
-							   th:fields="*{bidQuantity}">>
-						<p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}"></p>
+							   th:fields="*{bidQuantity}">
+						<p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}"
+						   th:errors="*{bidQuantity}">Error bidQuantity</p>
 					</div>
 				</div>
 				<!-- Buttons action -->

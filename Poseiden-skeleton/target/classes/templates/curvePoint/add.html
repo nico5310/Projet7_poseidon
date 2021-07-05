@@ -24,7 +24,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="curveId" placeholder="Curve Id"
 						   th:fields="*{curveId}">
-					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}"
+					   th:errors="*{curveId}">Error curveId
+					</p>
 				</div>
 			</div>
 
@@ -33,7 +35,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="term" placeholder="Term"
 						   th:fields="*{term}">
-					<p class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('term')}"
+					   th:errors="*{term}">Error term
+					</p>
 				</div>
 			</div>
 
@@ -42,7 +46,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="value" placeholder="Value"
 						   th:fields="*{value}">
-					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('value')}"
+					   th:errors="*{value}">Error value
+					</p>
 				</div>
 			</div>
 			<!-- Buttons action -->
