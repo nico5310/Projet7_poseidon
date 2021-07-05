@@ -17,9 +17,9 @@ public class RuleNameService {
     RuleNameRepository ruleNameRepository;
 
     public String home (Model model) {
-        log.info("Show bid list");
-        model.addAttribute("bidList", ruleNameRepository.findAll());
-        return "bidList/list";
+        log.info("Show ruleName");
+        model.addAttribute("ruleName", ruleNameRepository.findAll());
+        return "ruleName/list";
     }
 
     public void validate (@Valid RuleName ruleName, Model model) {

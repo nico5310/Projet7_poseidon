@@ -26,20 +26,20 @@ public class TradeController {
     public String home(Model model) {
         log.info("Show Trade page");
         tradeService.home(model);
-        return "trade/list";
+        return "/trade/list";
     }
     // ADD PAGE FORM
     @GetMapping("/trade/add")
     public String addUser(Trade bid) {
         log.info("Add trade page formulaire");
-        return "trade/add";
+        return "/trade/add";
     }
     // SAVE NEW TRADE
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         if (result.hasErrors()) {
             log.error("ERROR, Add new trade isn't possible");
-            return "bidList/add";
+            return "/trade/add";
         }
         log.info("SUCCESS, Add new trade to BidList");
         tradeService.validate(trade, model);

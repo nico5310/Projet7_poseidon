@@ -20,7 +20,7 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id ;
 
-    @NotNull (message = "ModdysRating is mandatory")
+    @NotNull (message = "MoodysRating is mandatory")
     String moodysRating ;
 
     @NotNull (message = "SandPRating is mandatory")
@@ -33,9 +33,8 @@ public class Rating implements Serializable {
     Integer orderNumber ;
 
 
-    public Rating(Integer id, String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
+    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
 
-        this.id           = id;
         this.moodysRating = moodysRating;
         this.sandPRating  = sandPRating;
         this.fitchRating  = fitchRating;

@@ -14,16 +14,17 @@
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/ruleName/update/{id}(id=${ruleName.id})}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of RuleName, there are 2 buttons: Update data and Cancel to the RuleName
-			 -->
+		<form action="#" th:action="@{/ruleName/update/{id}(id=${ruleName.id})}" th:object="${ruleName}"
+			  method="post" class="form-horizontal" style="width: 100%">
+
 			<div class="form-group">
 				<label for="name" class="col-form-label">Name</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="moddysRating" placeholder="ModdysRating"
-						   th:fields="*{name}">
-					<p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+					<input type="text" class="form-control" id="name" placeholder="Name"
+						   th:field="*{name}">
+					<p class="text-danger" th:if="${#fields.hasErrors('name')}"
+					   th:errors="*{name}">Error Name
+					</p>
 				</div>
 			</div>
 
@@ -31,8 +32,10 @@
 				<label for="description" class="col-form-label">Description</label>
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="description" placeholder="Description"
-						   th:fields="*{description}">
-					<p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+						   th:field="*{description}">
+					<p class="text-danger" th:if="${#fields.hasErrors('description')}"
+					   th:errors="*{description}">Error Description
+					</p>
 				</div>
 			</div>
 
@@ -40,35 +43,43 @@
 				<label for="json" class="col-form-label">json</label>
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="json" placeholder="json"
-						   th:fields="*{json}">
-					<p class="text-danger" th:if="${#fields.hasErrors('json')}" th:errors="*{json}"></p>
+						   th:field="*{json}">
+					<p class="text-danger" th:if="${#fields.hasErrors('json')}"
+					   th:errors="*{json}">Error json
+					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="template" class="col-form-label">template</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="order" placeholder="template"
-						   th:fields="*{template}">
-					<p class="text-danger" th:if="${#fields.hasErrors('template')}" th:errors="*{template}"></p>
+					<input type="text" class="form-control" id="template" placeholder="template"
+						   th:field="*{template}">
+					<p class="text-danger" th:if="${#fields.hasErrors('template')}"
+					   th:errors="*{template}">Error template
+					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="sqlStr" class="col-form-label">sqlStr</label>
+				<label for="sqlStr" class="col-form-label">sql</label>
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="sqlStr" placeholder="sql"
-						   th:fields="*{sqlStr}">
-					<p class="text-danger" th:if="${#fields.hasErrors('sqlsqlStrSte')}" th:errors="*{sqlStr}"></p>
+						   th:field="*{sqlStr}">
+					<p class="text-danger" th:if="${#fields.hasErrors('sqlStr')}"
+					   th:errors="*{sqlStr}">Error sqlStr
+					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="sqlPart" class="col-form-label">sql</label>
+				<label for="sqlPart" class="col-form-label">sqlPart</label>
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="sqlPart" placeholder="sqlPart"
-						   th:fields="*{sqlPart}">
-					<p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}"></p>
+						   th:field="*{sqlPart}">
+					<p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}"
+					   th:errors="*{sqlPart}">Error sqlPart
+					</p>
 				</div>
 			</div>
 

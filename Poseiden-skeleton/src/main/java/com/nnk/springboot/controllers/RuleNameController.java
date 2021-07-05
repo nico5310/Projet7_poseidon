@@ -27,14 +27,14 @@ public class RuleNameController {
     public String home(Model model) {
         log.info("Show RuleNameList page");
         ruleNameService.home(model);
-        return "ruleName/list";
+        return "/ruleName/list";
     }
 
     // ADD PAGE FORM
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName bid) {
         log.info("Get ruleName page formulaire");
-        return "ruleName/add";
+        return "/ruleName/add";
     }
 
     //SAVE RULENAME
@@ -42,7 +42,7 @@ public class RuleNameController {
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         if (result.hasErrors()) {
             log.error("ERROR, Add new ruleName isn't possible");
-            return "ruleName/add";
+            return "/ruleName/add";
         }
         log.info("SUCCESS, Add new ruleName to ruleNameList");
         ruleNameService.validate(ruleName, model);
@@ -54,7 +54,7 @@ public class RuleNameController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         log.info("Show Update form page by Id " + id);
         ruleNameService.showUpdateForm(id, model);
-        return "ruleName/update";
+        return "/ruleName/update";
     }
 
     // UPDATE EXIST RULENAME
@@ -63,7 +63,7 @@ public class RuleNameController {
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             log.error("ERROR, Update ruleName isn't possible");
-            return "redirect:/ruleName/update";
+            return "/ruleName/update";
         }
         log.info("SUCCESS, Update ruleName by Id :"+ id);
         ruleNameService.updateRuleName(id, ruleName, model);

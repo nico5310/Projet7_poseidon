@@ -19,11 +19,13 @@
 			TODO: Create a form to input the values of Rating, there are 2 buttons: Save data and Cancel to the list Rating
 			 -->
 			<div class="form-group">
-				<label for="moddysRating" class="col-form-label">ModdysRating</label>
+				<label for="moodysRating" class="col-form-label">MoodysRating</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="moddysRating" placeholder="ModdysRating"
-						   th:fields="*{moddysRating}">
-					<p class="text-danger" th:if="${#fields.hasErrors('moddysRating')}" th:errors="*{moddysRating}"></p>
+					<input type="text" class="form-control" id="moodysRating" placeholder="MoodysRating"
+						   th:fields="*{moodysRating}">
+					<p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}"
+					   th:errors="*{moodysRating}">Error moodysRating
+					</p>
 				</div>
 			</div>
 
@@ -32,25 +34,31 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="sandPRating" placeholder="SandPRating"
 						   th:fields="*{sandPRating}">
-					<p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}"
+					   th:errors="*{sandPRating}">Error sandPRating
+					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="fitchRating" class="col-form-label">FitchRating</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="bidQuantity" placeholder="FitchRating"
+					<input type="text" class="form-control" id="fitchRating" placeholder="FitchRating"
 						   th:fields="*{fitchRating}">
-					<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}"
+					   th:errors="*{fitchRating}">Error fitchRating
+					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="order" class="col-form-label">Order</label>
+				<label for="orderNumber" class="col-form-label">Order Number</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="order" placeholder="Order"
-						   th:fields="*{order}">
-					<p class="text-danger" th:if="${#fields.hasErrors('order')}" th:errors="*{order}"></p>
+					<input type="text" class="form-control" id="orderNumber" placeholder="OrderNumber"
+						   th:fields="*{orderNumber}">
+					<p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}"
+					   th:errors="*{orderNumber}">Error orderNumber
+					</p>
 				</div>
 			</div>
 

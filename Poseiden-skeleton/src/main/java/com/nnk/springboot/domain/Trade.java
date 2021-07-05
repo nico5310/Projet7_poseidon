@@ -24,10 +24,12 @@ public class Trade implements Serializable {
     @NotNull(message = "Account is mandatory")
     String account ;
 
-    @NotNull(message = "Account is mandatory")
+    @NotNull(message = "Type is mandatory")
     String type ;
 
+    @NotNull(message = "buyQuantity is mandatory")
     Double buyQuantity ;
+
     Double sellQuantity ;
     Double buyPrice ;
     Double sellPrice ;
@@ -46,29 +48,11 @@ public class Trade implements Serializable {
     String sourceListId ;
     String side ;
 
-    public Trade(Integer tradeId, String account, String type, Double buyQuantity, Double sellQuantity, Double buyPrice, Double sellPrice, String benchmark, Timestamp tradeDate, String security, String status, String trader, String book, String creationName, Timestamp creationDate, String revisionName, Timestamp revisionDate, String dealName, String dealType, String sourceListId, String side) {
+    public Trade(String account, String type, Double buyQuantity) {
 
-        this.tradeId      = tradeId;
-        this.account      = account;
-        this.type         = type;
-        this.buyQuantity  = buyQuantity;
-        this.sellQuantity = sellQuantity;
-        this.buyPrice     = buyPrice;
-        this.sellPrice    = sellPrice;
-        this.benchmark    = benchmark;
-        this.tradeDate    = tradeDate;
-        this.security     = security;
-        this.status       = status;
-        this.trader       = trader;
-        this.book         = book;
-        this.creationName = creationName;
-        this.creationDate = creationDate;
-        this.revisionName = revisionName;
-        this.revisionDate = revisionDate;
-        this.dealName     = dealName;
-        this.dealType     = dealType;
-        this.sourceListId = sourceListId;
-        this.side         = side;
+        this.account     = account;
+        this.type        = type;
+        this.buyQuantity = buyQuantity;
     }
 
     public Trade() {

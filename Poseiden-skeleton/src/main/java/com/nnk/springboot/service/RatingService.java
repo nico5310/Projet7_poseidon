@@ -34,7 +34,7 @@ public class RatingService {
         model.addAttribute("rating", rating);
     }
 
-    public void updateRating(Integer id,Rating rating, Model model) {
+    public void updateRating(Integer id,@Valid Rating rating, Model model) {
         log.info("Update exist rating by id" + id);
         rating.setId(id);
         ratingRepository.save(rating);

@@ -21,17 +21,22 @@ public class CurvePointTests {
 
 	@Test
 	public void curvePointTest() {
-		CurvePoint curvePoint = new CurvePoint(10, 10, 1619945463, 10, 10, 1620031863);
+
+		CurvePoint curvePoint = new CurvePoint();
+		curvePoint.setCurveId(1);
+		curvePoint.setTerm(10.00);
+		curvePoint.setValue(10.00);
+		curvePointRepository.save(curvePoint);
 
 		// Save
 		curvePoint = curvePointRepository.save(curvePoint);
 		Assert.assertNotNull(curvePoint.getId());
-		Assert.assertTrue(curvePoint.getCurveId() == 10);
+		Assert.assertTrue(curvePoint.getCurveId() == 1);
 
 		// Update
-		curvePoint.setCurveId(20);
+		curvePoint.setCurveId(2);
 		curvePoint = curvePointRepository.save(curvePoint);
-		Assert.assertTrue(curvePoint.getCurveId() == 20);
+		Assert.assertTrue(curvePoint.getCurveId() == 2);
 
 		// Find
 		List<CurvePoint> listResult = curvePointRepository.findAll();

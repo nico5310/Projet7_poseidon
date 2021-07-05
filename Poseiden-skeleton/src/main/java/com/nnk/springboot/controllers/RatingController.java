@@ -26,21 +26,21 @@ public class RatingController {
     public String home(Model model) {
         log.info("Show rating List");
         ratingService.home(model);
-        return "rating/list";
+        return "/rating/list";
     }
 
     //ADD PAGE FORM
     @GetMapping("/rating/add")
-    public String addRatingForm() {
+    public String addRatingForm(Rating rating) {
         log.info("Add rating page formulaire");
-        return "rating/add";
+        return "/rating/add";
     }
      //SAVE NEW RATING
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         if (result.hasErrors()) {
             log.error("ERROR, Add new rating isn't possible");
-            return "rating/add";
+            return "/rating/add";
         }
         log.info("SUCCESS, Add new rating to ratingList");
         ratingService.validate(rating, model);
@@ -52,7 +52,7 @@ public class RatingController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         log.info("Show Update form page by Id" + id);
         ratingService.showUpdateForm(id, model);
-        return "rating/update";
+        return "/rating/update";
     }
 
     //UPDATE EXIST RATING

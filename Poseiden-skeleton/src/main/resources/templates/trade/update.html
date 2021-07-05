@@ -22,7 +22,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="account" placeholder="Account"
 						   th:fields="*{account}">
-					<p class="text-danger" th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('account')}"
+					   th:errors="*{account}">Error account
+					</p>
 				</div>
 			</div>
 
@@ -31,7 +33,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="type" placeholder="Type"
 						   th:fields="*{type}">
-					<p class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('type')}"
+					   th:errors="*{type}">Error type
+					</p>
 				</div>
 			</div>
 
@@ -40,7 +44,9 @@
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="buyQuantity" placeholder="Bid quantity"
 						   th:fields="*{buyQuantity}">
-					<p class="text-danger" th:if="${#fields.hasErrors('buyQuantity')}" th:errors="*{buyQuantity}"></p>
+					<p class="text-danger" th:if="${#fields.hasErrors('buyQuantity')}"
+					   th:errors="*{buyQuantity}">Error buyQuantity
+					</p>
 				</div>
 			</div>
 

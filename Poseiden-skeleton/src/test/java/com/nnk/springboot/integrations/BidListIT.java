@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 
-public class BidLIstIT {
+public class BidListIT {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -48,11 +48,11 @@ public class BidLIstIT {
 	@DisplayName("BidTests2")
 	public void homeBidListTest2() throws Exception {
 
-				BidList bidList = new BidList();
-				bidList.setAccount("caisse");
-				bidList.setType("action");
-				bidList.setBidQuantity(Double.valueOf("10"));
-				bidListRepository.save(bidList);
+		BidList bidList = new BidList();
+		bidList.setAccount("caisse");
+		bidList.setType("action");
+		bidList.setBidQuantity(10.00);
+		bidListRepository.save(bidList);
 
 		mockMvc.perform(get("/bidList/list"))
 			   .andDo(print())
@@ -76,6 +76,7 @@ public class BidLIstIT {
 	@Test
 	@DisplayName("ValidateBidList")
 	public void validateBidListTest() throws Exception {
+
 		BidList bidList = new BidList();
 		bidList.setAccount("caisse");
 		bidList.setType("action");
@@ -90,6 +91,7 @@ public class BidLIstIT {
 	@Test
 	@DisplayName("ShowUpdateForm")
 	public void showUpdateFormTest() throws Exception {
+
 		BidList bidList = new BidList();
 		bidList.setAccount("caisse");
 		bidList.setType("action");
@@ -103,6 +105,7 @@ public class BidLIstIT {
 	@Test
 	@DisplayName("UpdateBid")
 	public void updateBidTest() throws Exception {
+
 		BidList bidList = new BidList();
 		bidList.setAccount("caisse");
 		bidList.setType("action");
@@ -121,6 +124,7 @@ public class BidLIstIT {
 	@Test
 	@DisplayName("deleteBid")
 	public void deleteBidTest() throws Exception {
+
 		BidList bidList = new BidList();
 		bidList.setAccount("caisse");
 		bidList.setType("action");
@@ -135,7 +139,5 @@ public class BidLIstIT {
 			   .andExpect(status().isOk())
 			   .andExpect(model().attribute("bidList", Matchers.hasSize(0)));
 	}
-
-
 
 }
