@@ -10,20 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Log4j2
 @Controller
-@RequestMapping("app")
+@RequestMapping("/app")
 public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public ModelAndView login() {
+        log.info("Get login");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
         return mav;
     }
 
-    @GetMapping("secure/article-details")
+    @GetMapping("/secure/article-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("users", userRepository.findAll());
@@ -31,8 +32,9 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("error")
+    @GetMapping("/error")
     public ModelAndView error() {
+
         ModelAndView mav = new ModelAndView();
         String errorMessage= "You are not authorized for the requested data.";
         mav.addObject("errorMsg", errorMessage);
@@ -40,7 +42,7 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public ModelAndView logout() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("logout");

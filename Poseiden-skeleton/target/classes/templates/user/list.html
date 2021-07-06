@@ -13,7 +13,7 @@
 
 
 			<div class="col-6 text-right">
-				<a href="/">Home</a>&nbsp;|&nbsp;<a href="/login">Login</a>
+				<a href="/">Home</a>&nbsp;|&nbsp;<a href="/app/login">Login</a>
 			</div>
 		</div>
 
@@ -32,10 +32,11 @@
 				</thead>
 				<tbody>
 					<tr th:each="user : ${users}">
-						<td style="width: 10%" th:text="${user.id}"></td>
+						<td th:text="${user.id}" style="width: 10%"></td>
 						<td th:text="${user.fullname}"></td>
 						<td th:text="${user.username}"></td>
-						<td style="width: 25%" th:text="${user.role}"></td>
+						<td th:text="${user.role }" style="width: 25%"></td>
+
 						<td style="width: 15%" class="text-center">
 							<a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
 							<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
