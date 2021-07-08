@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 
+/**
+ * Trade Controller is CRUD methods for Trade
+ */
 @Log4j2
 @Controller
 public class TradeController {
@@ -21,20 +23,31 @@ public class TradeController {
     @Autowired
     TradeService tradeService;
 
-    // SHOW TRADE LIST HOMEPAGE
+    /**
+     * Show trade HomePage
+     * @return the list of trade
+     */
     @RequestMapping("/trade/list")
     public String home(Model model) {
         log.info("Show Trade page");
         tradeService.home(model);
         return "/trade/list";
     }
-    // ADD PAGE FORM
+
+    /**
+     * Add new trade form page
+     * @return url Add new trade page
+     */
     @GetMapping("/trade/add")
     public String addUser(Trade bid) {
         log.info("Add trade page formulaire");
         return "/trade/add";
     }
-    // SAVE NEW TRADE
+
+    /**
+     * Validate Add new trade to trade List
+     * @return url tradeList page
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -45,14 +58,22 @@ public class TradeController {
         tradeService.validate(trade, model);
         return "redirect:/trade/list";
     }
-    // UPDATE PAGE FORM
+
+    /**
+     * Show Update trade form page
+     * @return url trade Update page
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer tradeId, Model model) {
         log.info("Show Update form page by Id " + tradeId);
         tradeService.showUpdateForm(tradeId, model);
         return "trade/update";
     }
-    //UPDATE EXIST BID
+
+    /**
+     * Update trade by id
+     * @return url tradeList page
+     */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer tradeId, @Valid Trade trade,
                              BindingResult result, Model model) {
@@ -65,6 +86,10 @@ public class TradeController {
         return "redirect:/trade/list";
     }
 
+    /**
+     * Delete trade by id
+     * @return url tradeList page
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer tradeId, Model model) {
         log.info("SUCCESS, Delete trade with Id :" + tradeId);

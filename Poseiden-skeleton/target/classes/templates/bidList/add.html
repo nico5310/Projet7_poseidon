@@ -17,9 +17,6 @@
 
 		<div class="row">
 			<form action="#" th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="form-horizontal" style="width: 100%">
-				<!--
-				TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
-				 -->
 				<div class="form-group">
 					<label for="account" class="col-form-label">Account</label>
 					<div class="col-md-8">
@@ -52,7 +49,7 @@
 					</div>
 				</div>
 				<!-- Buttons action -->
-				<div class="form-group" style="margin-top: 10px">
+				<div class="form-group" style="margin-top: 20px">
 					<div class="col-md-8">
 						<a class="btn btn-danger" href="/bidList/list/">Cancel</a>
 						<button class="btn btn-primary" type="submit">Add BidList</button>

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 
+/**
+ * RuleName Controller is CRUD methods for RuleName
+ */
 @Log4j2
 @Controller
 public class RuleNameController {
@@ -21,8 +23,10 @@ public class RuleNameController {
     @Autowired
     RuleNameService ruleNameService;
 
-
-    // SHOW RULENAME LIST HOMEPAGE
+    /**
+     * Show ruleName HomePage
+     * @return the list of ruleName List
+     */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
         log.info("Show RuleNameList page");
@@ -30,14 +34,20 @@ public class RuleNameController {
         return "/ruleName/list";
     }
 
-    // ADD PAGE FORM
+    /**
+     * Add new ruleName form page
+     * @return url Add new ruleName page
+     */
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName bid) {
         log.info("Get ruleName page formulaire");
         return "/ruleName/add";
     }
 
-    //SAVE RULENAME
+    /**
+     * Validate Add new ruleName to ruleName list
+     * @return url bidList page
+     */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -49,7 +59,10 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
-    // UPDATE PAGE FORM
+    /**
+     * Show Update ruleName form page
+     * @return url ruleName Update page
+     */
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         log.info("Show Update form page by Id " + id);
@@ -57,7 +70,10 @@ public class RuleNameController {
         return "/ruleName/update";
     }
 
-    // UPDATE EXIST RULENAME
+    /**
+     * Update ruleName by id
+     * @return url ruleName List page
+     */
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
@@ -70,6 +86,10 @@ public class RuleNameController {
         return "redirect:/ruleName/list";
     }
 
+    /**
+     * Delete ruleName by id
+     * @return url ruleName page
+     */
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
         log.info("SUCCESS, Delete ruleName with Id :" + id);

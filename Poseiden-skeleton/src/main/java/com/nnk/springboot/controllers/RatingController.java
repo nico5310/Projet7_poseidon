@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 
+/**
+ * Rating Controller is CRUD methods for Rating
+ */
 @Log4j2
 @Controller
 public class RatingController {
@@ -21,7 +23,10 @@ public class RatingController {
     @Autowired
     RatingService ratingService;
 
-    // SHOW RATING LIST HOMEPAGE
+    /**
+     * Show rating HomePage
+     * @return the list of rating
+     */
     @RequestMapping("/rating/list")
     public String home(Model model) {
         log.info("Show rating List");
@@ -29,13 +34,20 @@ public class RatingController {
         return "/rating/list";
     }
 
-    //ADD PAGE FORM
+    /**
+     * Add new rating form page
+     * @return url Add new rating page
+     */
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
         log.info("Add rating page formulaire");
         return "/rating/add";
     }
-     //SAVE NEW RATING
+
+    /**
+     * Validate Add new rating to ratingList
+     * @return url ratingList page
+     */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -47,7 +59,10 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
-    //UPDATE PAGE FORM
+    /**
+     * Show Update rating form page
+     * @return url rating Update page
+     */
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         log.info("Show Update form page by Id" + id);
@@ -55,7 +70,10 @@ public class RatingController {
         return "/rating/update";
     }
 
-    //UPDATE EXIST RATING
+    /**
+     * Update rating by id
+     * @return url ratingList page
+     */
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
@@ -68,6 +86,10 @@ public class RatingController {
         return "redirect:/rating/list";
     }
 
+    /**
+     * Delete rating by id
+     * @return url ratingList page
+     */
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         log.info("SUCCESS, Delete rating with Id :" + id);

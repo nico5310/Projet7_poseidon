@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.service.BidListService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * BidList Controller is CRUD methods for bidList.
+ */
+@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 @Log4j2
 @Controller
 public class BidListController {
@@ -21,22 +26,33 @@ public class BidListController {
     @Autowired
     BidListService bidListService;
 
-    // SHOW BID LIST HOMEPAGE
+    /**
+     * Show bidList HomePage
+     * @return the list of bids
+     */
+
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        log.info("Show BidList page");
-        bidListService.home(model);
+        log.info("Show BidList homepage");
+        model.addAttribute("bidLists", bidListService.findAll());
+
         return "/bidList/list";
     }
 
-    // ADD PAGE FORM
+    /**
+     * Add new bid form page
+     * @return url Add new bid page
+     */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
         log.info("Add bid page formulaire");
         return "/bidList/add";
     }
 
-    // SAVE NEW BID
+    /**
+     * Validate Add new bid to bidList
+     * @return url bidList page
+     */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
 
@@ -49,7 +65,10 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
-    // UPDATE PAGE FORM
+    /**
+     * Show Update bid form page
+     * @return url bid Update page
+     */
     @GetMapping("/bidList/update/{bidListId}")
     public String showUpdateForm(@PathVariable("bidListId") Integer bidListId, Model model) {
         log.info("Show Update form page by Id " + bidListId);
@@ -57,8 +76,10 @@ public class BidListController {
         return "bidList/update";
     }
 
-
-    //UPDATE EXIST BID
+    /**
+     * Update bid by id
+     * @return url bidList page
+     */
     @PostMapping("/bidList/update/{bidListId}")
     public String updateBid(@PathVariable("bidListId") Integer bidListId, @Valid BidList bidList,
                              BindingResult result, Model model) {
@@ -71,7 +92,10 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
-
+    /**
+     * Delete bid by id
+     * @return url bidList page
+     */
     @GetMapping("/bidList/delete/{bidListId}")
     public String deleteBid(@PathVariable("bidListId") Integer bidListId, Model model) {
         log.info("SUCCESS, Delete bid with Id :" + bidListId);

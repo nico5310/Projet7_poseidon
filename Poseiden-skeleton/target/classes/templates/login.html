@@ -18,10 +18,6 @@
         </div>
         <main class="form-signing" style="width:100%; max-width:330px; padding: 15px;margin: auto">
             <div class="container form-group" style="width: 60rem;">
-            <!-- success message -->
-                <div th:if="${param.success}">
-                    <div class="col-sm-4 alert alert-info">You've successfully registred to our awesome app !</div>
-                </div>
 
                 <form class="form-horizontal" style="width:100%"
                       action="#" th:action="@{login}" th:object="${user}" method="post">
@@ -34,7 +30,8 @@
                       </div>
                     <div class="form-group">
                         <div class="col-sm-4"> Password:
-                            <input type="text" name="password" class="form-control input-lg" id="password" placeholder="Password">
+                            <input type="password" name="password" class="form-control input-lg" id="password"
+                                   placeholder="Password">
                             <label for="password"></label>
                         </div>
                         <p th:if="${param.error}"></p>

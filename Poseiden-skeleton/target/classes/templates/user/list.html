@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <title>Home</title>
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -19,11 +20,13 @@
 
 		<div class="row"><h2>User List</h2></div>
 		<div class="row">
-			<a href="/user/add" class="btn btn-primary btn-sm">Add New</a>
-			<table class="table table-bordered">
+			<div class="col">
+				<a href="/user/add" class="btn btn-primary btn-sm" style="margin-bottom: 10px">Add New</a>
+			</div>
+			<table class="table table-bordered" style="margin-top: 10px">
 				<thead>
 					<tr>
-						<th>Id</th>
+						<th >Id</th>
 						<th>Full Name</th>
 						<th>User Name</th>
 						<th>Role</th>
