@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,6 +38,7 @@ public class CurvePointIT {
     @Autowired
     CurvePointRepository curvePointRepository;
 
+    @WithMockUser
     @Test
     @DisplayName("homeCurvePoint test")
     public void homeCurvePointTest() throws Exception {
@@ -47,6 +49,7 @@ public class CurvePointIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("homeCurvePoint test2")
     public void homeCurvePointTest2() throws Exception {
@@ -66,6 +69,7 @@ public class CurvePointIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("AddCurvePointForm")
     public void addCurvePointFormTest() throws Exception {
@@ -76,20 +80,24 @@ public class CurvePointIT {
 
     }
 
+    @WithMockUser
     @Test
-    @DisplayName("ValidateBidList")
+    @DisplayName("ValidateCurvePointList")
     public void validateCurvePointTest() throws Exception {
+
         CurvePoint curvePoint = new CurvePoint();
-        curvePoint.setCurveId(1);
+//        curvePoint.setCurveId(1);
         curvePoint.setTerm(10.00);
         curvePoint.setValue(10.00);
         curvePointRepository.save(curvePoint);
 
         mockMvc.perform(post("/curvePoint/validate"))
-               .andExpect(status().isOk());
+               .andExpect(status().isOk())
+               .andExpect(model().attribute("curvePoint", Matchers.hasSize(1)));
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("ShowUpdateForm")
     public void showUpdateFormTest() throws Exception {
@@ -103,24 +111,28 @@ public class CurvePointIT {
                .andExpect(status().isOk());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("UpdateCurvePoint")
     public void updateCurvePointTest() throws Exception {
+
         CurvePoint curvePoint = new CurvePoint();
         curvePoint.setCurveId(1);
         curvePoint.setTerm(10.00);
         curvePoint.setValue(10.00);
         curvePointRepository.save(curvePoint);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/curvePoint/update/1")
-                                              .param("curveId", "1")
-                                              .param("term", "20.00")
-                                              .param("value", "20.00"))
+               .param("curveId", "1")
+               .param("term", "20.00")
+               .param("value", "10.00"))
                .andExpect(redirectedUrl("/curvePoint/list"));
         mockMvc.perform(get("/curvePoint/update/1"))
                .andExpect(status().isOk())
                .andExpect(model().attribute("curvePoint", Matchers.hasProperty("term", is(20.00))));
     }
 
+    @WithMockUser
     @Test
     @DisplayName("deleteBid")
     public void deleteBidTest() throws Exception {

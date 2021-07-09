@@ -2,7 +2,9 @@ package com.nnk.springboot.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -32,39 +34,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
 
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http    .authorizeRequests()
-                .antMatchers("/")
-                .permitAll()
-                .antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
-                .hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/user/**")
-                .hasAnyAuthority("ADMIN")
+
+        http
+                /*
+               * Access setup
+                 */
+                .authorizeRequests()
+                    .antMatchers("/")
+                    .permitAll()
+                    .antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
+                    .hasAnyAuthority("ADMIN", "USER")
+                    .antMatchers("/user/**")
+                    .hasAnyAuthority("ADMIN")
+                    .and()
+                /*
+                 * Login Setup
+                 */
+                .formLogin()
+                    .loginPage("/app/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/bidList/list")
+                    .and()
+                .logout()
+                .logoutUrl("/")
                 .and()
-            .formLogin()
-                .loginPage("/app/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/bidList/list")
+                .exceptionHandling()
+                .accessDeniedPage("/app/error")
                 .and()
-            .logout()
-                .logoutUrl("/app/logout")
-                .logoutSuccessUrl("/logout")
-                .and()
-            .exceptionHandling()
-            .accessDeniedPage("/app/error")
-                .and()
-            .httpBasic();
+                .httpBasic();
+
     }
 
-    @Override
+//    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider())
             .inMemoryAuthentication()

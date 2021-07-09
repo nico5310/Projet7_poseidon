@@ -6,8 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import javax.validation.Valid;
-import java.awt.*;
+
 import java.util.List;
 
 /**
@@ -24,18 +23,20 @@ public class BidListService {
      * Show bid List
      * @return all bidList
      */
-    public List<BidList> findAll() {
-                log.info("Show bid list");
-        return bidListRepository.findAll();
+    public String home (Model model) {
+        log.info("Show bidList List");
+        model.addAttribute("bidList", bidListRepository.findAll());
+        return "bidList/list";
     }
 
     /**
      * Add new bid
      */
-    public void validate (@Valid BidList bid, Model model) {
+    public void validate(BidList bid, Model model) {
         log.info("Add new bid to bid List");
         bidListRepository.save(bid);
-        model.addAttribute("bidList", bidListRepository.findAll());
+        model.addAttribute("bidList",bidListRepository.findAll());
+
     }
 
     /**

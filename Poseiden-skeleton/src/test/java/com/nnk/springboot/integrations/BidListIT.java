@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -20,12 +19,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -54,7 +49,7 @@ public class BidListIT {
 
 
 
-	@WithMockUser("admin")
+	@WithMockUser
 	@Test
 	@DisplayName("BidList test")
 	public void homeBidListTest() throws Exception {
@@ -65,6 +60,7 @@ public class BidListIT {
 
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("BidTests2")
 	public void homeBidListTest2() throws Exception {
@@ -76,14 +72,14 @@ public class BidListIT {
 		bidListRepository.save(bidList);
 
 		mockMvc.perform(get("/bidList/list"))
-			   .andDo(print())
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("/bidList/list"))
-			   .andExpect(model().attribute("bidList", Matchers.hasSize(1)))
+			   .andExpect(model().attribute("bidLists", Matchers.hasSize(1)))
 			   .andReturn();
 
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("AddBidForm")
 	public void addBidFormTest() throws Exception {
@@ -94,21 +90,30 @@ public class BidListIT {
 
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("ValidateBidList")
 	public void validateBidListTest() throws Exception {
 
-		BidList bidList = new BidList();
-		bidList.setAccount("caisse");
-		bidList.setType("action");
-		bidList.setBidQuantity(10.00);
-		bidListRepository.save(bidList);
+//		BidList bidList = new BidList();
+//		bidList.setAccount("caisse");
+//		bidList.setType("action");
+//		bidList.setBidQuantity(10.00);
+//		bidListRepository.save(bidList);
 
-		mockMvc.perform(post("/bidList/validate"))
-				.andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
+				.param("account", "caisse")
+				.param("type", "action")
+				.param("bidQuantity", "10.0"))
+		        .andExpect(redirectedUrl("/bidList/list"));
+
+		mockMvc.perform(get("/bidList/list"))
+				.andExpect(status().isOk())
+				.andExpect(model().attribute("bidLists", Matchers.hasSize(1)));
 
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("ShowUpdateForm")
 	public void showUpdateFormTest() throws Exception {
@@ -123,6 +128,7 @@ public class BidListIT {
 			   .andExpect(status().isOk());
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("UpdateBid")
 	public void updateBidTest() throws Exception {
@@ -132,16 +138,18 @@ public class BidListIT {
 		bidList.setType("action");
 		bidList.setBidQuantity(10.00);
 		bidListRepository.save(bidList);
+
 		mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/1")
-													   .param("account", "caisse")
-													   .param("type", "action")
-													   .param("bidQuantity", "20.00"))
-													   .andExpect(redirectedUrl("/bidList/list"));
+				.param("account", "caisse")
+				.param("type", "action")
+				.param("bidQuantity", "20.0"))
+			   .andExpect(redirectedUrl("/bidList/list"));
 		mockMvc.perform(get("/bidList/update/1"))
 			   .andExpect(status().isOk())
 			   .andExpect(model().attribute("bidList", Matchers.hasProperty("bidQuantity", is(20.00))));
 	}
 
+	@WithMockUser
 	@Test
 	@DisplayName("deleteBid")
 	public void deleteBidTest() throws Exception {
@@ -158,7 +166,7 @@ public class BidListIT {
 
 		mockMvc.perform(get("/bidList/list"))
 			   .andExpect(status().isOk())
-			   .andExpect(model().attribute("bidList", Matchers.hasSize(0)));
+			   .andExpect(model().attribute("bidLists", Matchers.hasSize(0)));
 	}
 
 }

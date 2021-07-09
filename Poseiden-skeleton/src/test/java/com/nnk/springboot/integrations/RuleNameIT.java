@@ -1,8 +1,6 @@
 package com.nnk.springboot.integrations;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -35,6 +33,7 @@ public class RuleNameIT {
     @Autowired
     RuleNameRepository ruleNameRepository;
 
+    @WithMockUser
     @Test
     @DisplayName("Rule test")
     public void homeRuleTest() throws Exception {
@@ -45,6 +44,7 @@ public class RuleNameIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("RuleTests2")
     public void homeRuleNameTest2() throws Exception {
@@ -66,6 +66,7 @@ public class RuleNameIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("AddRuleNameForm")
     public void addRuleNameFormTest() throws Exception {
@@ -76,6 +77,7 @@ public class RuleNameIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("ValidateRuleName")
     public void validateRuleNameTest() throws Exception {
@@ -93,6 +95,7 @@ public class RuleNameIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("ShowUpdateForm")
     public void showUpdateFormTest() throws Exception {
@@ -109,6 +112,7 @@ public class RuleNameIT {
                .andExpect(status().isOk());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("UpdateRuleName")
     public void updateRuleNameTest() throws Exception {
@@ -134,6 +138,7 @@ public class RuleNameIT {
                .andExpect(model().attribute("ruleName", Matchers.hasProperty("name", is("ruleName"))));
     }
 
+    @WithMockUser
     @Test
     @DisplayName("deleteRating")
     public void deleteRatingTest() throws Exception {
@@ -154,7 +159,5 @@ public class RuleNameIT {
                .andExpect(status().isOk())
                .andExpect(model().attribute("ruleName", Matchers.hasSize(0)));
     }
-
-
 
 }

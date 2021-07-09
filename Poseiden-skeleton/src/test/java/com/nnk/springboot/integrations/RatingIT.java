@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,6 +37,7 @@ public class RatingIT {
     RatingRepository ratingRepository;
 
 
+    @WithMockUser
     @Test
     @DisplayName("Rating test")
     public void homeRatingTest() throws Exception {
@@ -46,6 +48,7 @@ public class RatingIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("RatingTests2")
     public void homeRatingTest2() throws Exception {
@@ -65,6 +68,7 @@ public class RatingIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("AddRatingForm")
     public void addRatingFormTest() throws Exception {
@@ -75,9 +79,11 @@ public class RatingIT {
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("ValidateRatingList")
     public void validateRatingTest() throws Exception {
+
         Rating rating = new Rating();
         rating.setMoodysRating("moody");
         rating.setSandPRating("sand");
@@ -85,11 +91,13 @@ public class RatingIT {
         rating.setOrderNumber(1);
         ratingRepository.save(rating);
 
-        mockMvc.perform(post("/rating/validate"))
-               .andExpect(status().isOk());
+        mockMvc.perform(post("/rating/list"))
+                .andExpect(status().isOk())
+                .andExpect(model().attribute("rating", Matchers.hasSize(1)));
 
     }
 
+    @WithMockUser
     @Test
     @DisplayName("ShowUpdateForm")
     public void showUpdateFormTest() throws Exception {
@@ -104,6 +112,7 @@ public class RatingIT {
                .andExpect(status().isOk());
     }
 
+    @WithMockUser
     @Test
     @DisplayName("UpdateRating")
     public void updateRatingTest() throws Exception {
@@ -124,6 +133,7 @@ public class RatingIT {
                .andExpect(model().attribute("rating", Matchers.hasProperty("orderNumber", is(2))));
     }
 
+    @WithMockUser
     @Test
     @DisplayName("deleteRating")
     public void deleteRatingTest() throws Exception {

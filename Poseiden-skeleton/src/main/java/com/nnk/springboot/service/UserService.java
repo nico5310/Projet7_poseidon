@@ -4,6 +4,9 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import javax.validation.Valid;
@@ -18,6 +21,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    DaoAuthenticationProvider daoAuthenticationProvider;
+
     /**
      * Show user List
      * @return all userList
@@ -31,8 +40,10 @@ public class UserService {
     /**
      * Add new user
      */
-    public void validate (@Valid User user, Model model) {
+    public void validate (User user, Model model) {
         log.info("Add new user to user List");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
     }
@@ -52,6 +63,8 @@ public class UserService {
      */
     public void updateUser(Integer id, User user, Model model) {
         log.info("Update exist user by id" + id);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setId(id);
         userRepository.save(user);
         model.addAttribute("users",userRepository.findAll());

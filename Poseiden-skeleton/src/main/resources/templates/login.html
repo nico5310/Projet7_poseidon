@@ -20,7 +20,7 @@
             <div class="container form-group" style="width: 60rem;">
 
                 <form class="form-horizontal" style="width:100%"
-                      action="#" th:action="@{login}" th:object="${user}" method="post">
+                      action="#" th:action="@{/app/login}" th:object="${user}" method="post">
                       <div class="form-group">
                           <div class="col-sm-4">User:
                               <input type="text" name="username" class="form-control" id="username" placeholder="Username">
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <div class="col-sm-4"> Password:
                             <input type="password" name="password" class="form-control input-lg" id="password"
-                                   placeholder="Password">
+                                   placeholder="Password" required="true">
                             <label for="password"></label>
                         </div>
                         <p th:if="${param.error}"></p>
