@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
@@ -12,7 +12,7 @@
 		<div class="col-6">
 			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
 			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Rating</a>&nbsp;|&nbsp;
 			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
 			<a href="/ruleName/list">Rule</a>
 		</div>
@@ -40,15 +40,15 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all CurvePoint to the table, the action column will have Edit & Delete buttons -->
-			<tr th:each="curvePoint : ${curvePoints}">
+
+			<tr th:each="curvePoint : ${curvePoint}">
 				<td th:text="${curvePoint.id}"></td>
 				<td th:text="${curvePoint.curveId}"></td>
 				<td th:text="${curvePoint.term}"></td>
 				<td th:text="${curvePoint.value}"></td>
 				<td class="text-center">
-					<a class="btn btn-primary" href="/curvePoint/update/{id}(id=${curvePoint.id})">Edit</a>&nbsp;|
-					<a class="btn btn-warning" href="/curvePoint/delete/{id}(id=${curvePoint.id})">Delete</a>
+					<a class="btn btn-primary" th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a>&nbsp;|
+					<a class="btn btn-warning" th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}">Delete</a>
 				</td>
 			</tr>
 			</tbody>

@@ -15,7 +15,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "trade")
 public class Trade implements Serializable {
-    // TODO: Map columns in data table TRADE with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

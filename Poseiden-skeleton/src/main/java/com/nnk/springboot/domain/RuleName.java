@@ -14,7 +14,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "rulename")
 public class RuleName implements Serializable {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

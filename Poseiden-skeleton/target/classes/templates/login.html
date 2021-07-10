@@ -14,7 +14,7 @@
     <div class="container" >
         <div class="row text-center">
             <h3>Login with Username and Password</h3>
-            <p th:if="${param.error}"> Bad Credentials </p>
+            <p th:if="${param.error}" class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
         </div>
         <main class="form-signing" style="width:100%; max-width:330px; padding: 15px;margin: auto">
             <div class="container form-group" style="width: 60rem;">
@@ -39,7 +39,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-4" style="margin-top: 10px">
-                            <input class="btn btn-light" type="submit" value="Login">
+                            <input class="btn btn-outline-secondary text-dark" style="background-color: #F0F0F0"
+                                   type="submit" value="Login">
                         </div>
                     </div>
                 </form>

@@ -60,7 +60,7 @@ public class CurvePointService {
      * Delete curvePoint by id
      */
     public void deleteCurvePoint(Integer id, Model model) {
-        log.info("Delete curvepoint by Id" + id);
+        log.info("Delete curvePoint by Id" + id);
         CurvePoint curvePoint = curvePointRepository.findById(id).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + id));
         curvePointRepository.delete(curvePoint);
         model.addAttribute("curvePoint", curvePointRepository.findAll());

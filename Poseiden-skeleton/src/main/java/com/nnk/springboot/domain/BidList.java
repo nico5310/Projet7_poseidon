@@ -58,5 +58,5 @@ public class BidList implements Serializable {
 
     }
 
-    public BidList(String account_test, String type_test, double v) {}
+
 }
