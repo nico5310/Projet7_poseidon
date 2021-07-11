@@ -31,18 +31,14 @@ public class LoginController {
         return mav;
     }
 
-    /**
-     * Authentication is successful
-     * @return url user list page if successful
-     */
-    @GetMapping("/secure/article-details")
-    public ModelAndView getAllUserArticles() {
-        log.info("SUCCESS, authentication is validate");
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
-        mav.setViewName("user/list");
-        return mav;
-    }
+
+//    @GetMapping("/secure/article-details")
+//    public ModelAndView getAllUserArticles() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("users", userRepository.findAll());
+//        mav.setViewName("user/list");
+//        return mav;
+//    }
 
     /**
      * Authentication isn't successful
@@ -52,7 +48,7 @@ public class LoginController {
     public ModelAndView error() {
         log.error("ERROR, authentication isn't validate");
         ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
+        String errorMessage= "ERROR, authentication isn't validate.";
         mav.addObject("errorMsg", errorMessage);
         mav.setViewName("403");
         return mav;

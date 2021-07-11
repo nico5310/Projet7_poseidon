@@ -64,6 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("password")
                     .defaultSuccessUrl("/bidList/list")
                     .and()
+                /*
+                * Logout
+                 */
                 .logout()
                     .logoutUrl("/app-logout")
                     .and()
