@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org" lang="EN">
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
@@ -44,7 +44,7 @@
 				<label for="buyQuantity" class="col-form-label">Bid quantity</label>
 				<div class="col-md-8">
 					<input type="text" class="form-control" id="buyQuantity" placeholder="Buy Quantity"
-						   th:field="*{buyQuantity}">>
+						   th:field="*{buyQuantity}">
 					<p class="text-danger" th:if="${#fields.hasErrors('buyQuantity')}"
 					   th:errors="*{buyQuantity}">Error buyQuantity
 					</p>

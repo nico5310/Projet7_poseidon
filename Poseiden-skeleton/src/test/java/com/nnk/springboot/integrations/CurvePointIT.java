@@ -1,10 +1,9 @@
 package com.nnk.springboot.integrations;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +11,24 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.sql.Timestamp;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@Sql(executionPhase= Sql.ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/create_db_script-Test.sql")
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
-
 public class CurvePointIT {
 
     @Autowired
@@ -38,14 +37,35 @@ public class CurvePointIT {
     @Autowired
     CurvePointRepository curvePointRepository;
 
+    @Autowired
+    private WebApplicationContext context;
+
+    @Before
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
+
     @WithMockUser
     @Test
     @DisplayName("homeCurvePoint test")
-    public void homeCurvePointTest() throws Exception {
+    public void homeCurvePointAdminTest() throws Exception {
 
         mockMvc.perform(get("/curvePoint/list"))
                .andExpect(status().isOk())
                .andExpect(view().name("curvePoint/list"));
+
+    }
+
+
+    @Test
+    @DisplayName("homeCurvePoint test")
+    public void homeCurvePointAnonymousTest() throws Exception {
+
+        mockMvc.perform(get("/curvePoint/list"))
+               .andExpect(status().isUnauthorized());
 
     }
 
@@ -61,7 +81,6 @@ public class CurvePointIT {
         curvePointRepository.save(curvePoint);
 
         mockMvc.perform(get("/curvePoint/list"))
-               .andDo(print())
                .andExpect(status().isOk())
                .andExpect(view().name("curvePoint/list"))
                .andExpect(model().attribute("curvePoint", Matchers.hasSize(1)))
@@ -86,12 +105,12 @@ public class CurvePointIT {
     public void validateCurvePointTest() throws Exception {
 
         CurvePoint curvePoint = new CurvePoint();
-//        curvePoint.setCurveId(1);
+        curvePoint.setCurveId(1);
         curvePoint.setTerm(10.00);
         curvePoint.setValue(10.00);
         curvePointRepository.save(curvePoint);
 
-        mockMvc.perform(post("/curvePoint/validate"))
+        mockMvc.perform(get("/curvePoint/list"))
                .andExpect(status().isOk())
                .andExpect(model().attribute("curvePoint", Matchers.hasSize(1)));
 
@@ -109,6 +128,8 @@ public class CurvePointIT {
 
         mockMvc.perform(get("/curvePoint/update/1"))
                .andExpect(status().isOk());
+
+        curvePointRepository.delete(curvePointRepository.findAll().get(0));
     }
 
     @WithMockUser
@@ -130,12 +151,14 @@ public class CurvePointIT {
         mockMvc.perform(get("/curvePoint/update/1"))
                .andExpect(status().isOk())
                .andExpect(model().attribute("curvePoint", Matchers.hasProperty("term", is(20.00))));
+
     }
 
     @WithMockUser
     @Test
     @DisplayName("deleteBid")
     public void deleteBidTest() throws Exception {
+
         CurvePoint curvePoint = new CurvePoint();
         curvePoint.setCurveId(1);
         curvePoint.setTerm(10.00);
@@ -149,6 +172,7 @@ public class CurvePointIT {
         mockMvc.perform(get("/curvePoint/list"))
                .andExpect(status().isOk())
                .andExpect(model().attribute("curvePoint", Matchers.hasSize(0)));
+
     }
 
 }

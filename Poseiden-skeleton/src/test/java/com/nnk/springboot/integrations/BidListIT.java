@@ -1,6 +1,5 @@
 package com.nnk.springboot.integrations;
 
-
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.hamcrest.Matchers;
@@ -9,10 +8,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -23,9 +22,9 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@Sql(executionPhase= Sql.ExecutionPhase.BEFORE_TEST_METHOD,scripts="classpath:/create_db_script-Test.sql")
+//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest()
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 public class BidListIT {
@@ -47,18 +46,26 @@ public class BidListIT {
 				.build();
 	}
 
-
-
 	@WithMockUser
 	@Test
 	@DisplayName("BidList test")
-	public void homeBidListTest() throws Exception {
+	public void homeBidListAdminTest() throws Exception {
 
 		mockMvc.perform(get("/bidList/list"))
 			   	.andExpect(status().isOk())
 			   	.andExpect(view().name("/bidList/list"));
 
 	}
+
+	@Test
+	@DisplayName("BidList test")
+	public void homeBidListAnonymousTest() throws Exception {
+
+		mockMvc.perform(get("/bidList/list"))
+			   .andExpect(status().isUnauthorized());
+
+	}
+
 
 	@WithMockUser
 	@Test
@@ -74,7 +81,7 @@ public class BidListIT {
 		mockMvc.perform(get("/bidList/list"))
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("/bidList/list"))
-			   .andExpect(model().attribute("bidLists", Matchers.hasSize(1)))
+			   .andExpect(model().attribute("bidList", Matchers.hasSize(1)))
 			   .andReturn();
 
 	}
@@ -95,21 +102,16 @@ public class BidListIT {
 	@DisplayName("ValidateBidList")
 	public void validateBidListTest() throws Exception {
 
-//		BidList bidList = new BidList();
-//		bidList.setAccount("caisse");
-//		bidList.setType("action");
-//		bidList.setBidQuantity(10.00);
-//		bidListRepository.save(bidList);
-
-		mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
-				.param("account", "caisse")
-				.param("type", "action")
-				.param("bidQuantity", "10.0"))
-		        .andExpect(redirectedUrl("/bidList/list"));
+		BidList bidList = new BidList();
+		bidList.setBidListId(1);
+		bidList.setAccount("caisse");
+		bidList.setType("action");
+		bidList.setBidQuantity(10.00);
+		bidListRepository.save(bidList);
 
 		mockMvc.perform(get("/bidList/list"))
 				.andExpect(status().isOk())
-				.andExpect(model().attribute("bidLists", Matchers.hasSize(1)));
+				.andExpect(model().attribute("bidList", Matchers.hasSize(1)));
 
 	}
 
@@ -119,6 +121,7 @@ public class BidListIT {
 	public void showUpdateFormTest() throws Exception {
 
 		BidList bidList = new BidList();
+		bidList.setBidListId(1);
 		bidList.setAccount("caisse");
 		bidList.setType("action");
 		bidList.setBidQuantity(10.00);
@@ -126,6 +129,7 @@ public class BidListIT {
 
 		mockMvc.perform(get("/bidList/update/1"))
 			   .andExpect(status().isOk());
+
 	}
 
 	@WithMockUser
@@ -144,9 +148,11 @@ public class BidListIT {
 				.param("type", "action")
 				.param("bidQuantity", "20.0"))
 			   .andExpect(redirectedUrl("/bidList/list"));
+
 		mockMvc.perform(get("/bidList/update/1"))
 			   .andExpect(status().isOk())
 			   .andExpect(model().attribute("bidList", Matchers.hasProperty("bidQuantity", is(20.00))));
+
 	}
 
 	@WithMockUser
@@ -166,7 +172,8 @@ public class BidListIT {
 
 		mockMvc.perform(get("/bidList/list"))
 			   .andExpect(status().isOk())
-			   .andExpect(model().attribute("bidLists", Matchers.hasSize(0)));
+			   .andExpect(model().attribute("bidList", Matchers.hasSize(0)));
+
 	}
 
 }

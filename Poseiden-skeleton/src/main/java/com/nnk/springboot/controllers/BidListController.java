@@ -22,9 +22,6 @@ public class BidListController {
     @Autowired
     BidListService bidListService;
 
-    @Autowired
-    BidListRepository bidListRepository;
-
     /**
      * Show bidList HomePage
      * @return the list of bids

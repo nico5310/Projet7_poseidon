@@ -82,9 +82,10 @@ public class UserController {
      */
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
             log.error("ERROR, Update user isn't valid");
-            return "user/update";
+            return "redirect:/user/update";
         }
         PasswordValidator passwordValidator = new PasswordValidator();
         if (!passwordValidator.isValid(user.getPassword())) {
@@ -92,7 +93,7 @@ public class UserController {
             return"/user/update";
         }else {
             log.info("SUCCESS, add new User");
-            userService.validate(user, model);
+            userService.updateUser(id, user, model);
             return "redirect:/user/list";
         }
 

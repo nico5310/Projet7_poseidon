@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.repositories.RuleNameRepository;
 import com.nnk.springboot.service.RuleNameService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class RuleNameController {
 
     @Autowired
     RuleNameService ruleNameService;
+
 
     /**
      * Show ruleName HomePage
@@ -50,6 +52,7 @@ public class RuleNameController {
      */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
             log.error("ERROR, Add new ruleName isn't possible");
             return "/ruleName/add";
@@ -79,7 +82,7 @@ public class RuleNameController {
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             log.error("ERROR, Update ruleName isn't possible");
-            return "/ruleName/update";
+            return "redirect:/ruleName/update";
         }
         log.info("SUCCESS, Update ruleName by Id :"+ id);
         ruleNameService.updateRuleName(id, ruleName, model);

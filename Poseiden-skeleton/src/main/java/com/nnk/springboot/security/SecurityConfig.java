@@ -44,36 +44,45 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
+                .csrf().disable()
                 /*
                * Access setup
                  */
                 .authorizeRequests()
                     .antMatchers("/")
                     .permitAll()
-                    .antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**")
-                    .hasAnyAuthority("ADMIN", "USER")
-                    .antMatchers("/user/**")
-                    .hasAnyAuthority("ADMIN")
-                    .and()
+                    .antMatchers(HttpMethod.GET,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+                    .antMatchers(HttpMethod.POST,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+                    .antMatchers(HttpMethod.PUT,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+                    .antMatchers(HttpMethod.DELETE,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+//                    .hasAnyAuthority("ADMIN", "USER")
+                    .antMatchers("/user/**").authenticated()
+//                    .hasAnyAuthority("ADMIN")
+
                 /*
                  * Login Setup
                  */
-                .formLogin()
+                .and()
+                    .formLogin()
                     .loginPage("/app/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/bidList/list")
-                    .and()
+
                 /*
                 * Logout
                  */
-                .logout()
+                .and()
+                    .logout()
                     .logoutUrl("/app-logout")
                     .and()
-                .exceptionHandling()
-                .accessDeniedPage("/app/error")
+                    .exceptionHandling()
+                    .accessDeniedPage("/app/error")
+                /*
+                * Authentification de base for Configure methods
+                 */
                 .and()
-                .httpBasic();
+                    .httpBasic();
 
     }
 

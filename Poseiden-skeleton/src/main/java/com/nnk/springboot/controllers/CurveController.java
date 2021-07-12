@@ -82,7 +82,7 @@ public class CurveController {
             log.error("ERROR, Update curvePoint isn't possible");
             return "redirect:/curvePoint/update";
         }
-        log.info("SUCCESS, Update curvePoint by Id :"+ curvePoint);
+        log.info("SUCCESS, Update curvePoint by Id :"+ id);
         curvePointService.updateCurvePoint(id, curvePoint, model);
         return "redirect:/curvePoint/list";
     }
