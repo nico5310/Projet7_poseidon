@@ -1,0 +1,17 @@
+com\nnk\springboot\PasswordEncodeTest.class
+com\nnk\springboot\RatingTests.class
+com\nnk\springboot\service\BidListServiceTest.class
+com\nnk\springboot\integrations\CurvePointIT.class
+com\nnk\springboot\integrations\HomeHtmlIT.class
+com\nnk\springboot\integrations\RatingIT.class
+com\nnk\springboot\integrations\TradeIT.class
+com\nnk\springboot\RuleTests.class
+com\nnk\springboot\integrations\BidListIT.class
+com\nnk\springboot\BidTests.class
+com\nnk\springboot\integrations\UserIT.class
+com\nnk\springboot\PasswordValidatorTest.class
+com\nnk\springboot\integrations\LoginHtmlIT.class
+com\nnk\springboot\integrations\RuleNameIT.class
+com\nnk\springboot\CurvePointTests.class
+com\nnk\springboot\TradeTests.class
+com\nnk\springboot\service\CurvePointServiceTest.class

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * BidList Controller is CRUD methods for bidList.
@@ -21,6 +22,9 @@ public class BidListController {
 
     @Autowired
     BidListService bidListService;
+
+    @Autowired
+    BidListRepository bidListRepository;
 
     /**
      * Show bidList HomePage
@@ -51,12 +55,15 @@ public class BidListController {
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
 
+        List<BidList> bidListList = bidListRepository.findAll();
+        model.addAttribute("bidList",bidListRepository.findAll());
+
         if (result.hasErrors()) {
             log.error("ERROR, Add new bid isn't possible");
             return "bidList/add";
         }
         log.info("SUCCESS, Add new bid to BidList");
-        bidListService.validate(bid, model);
+        bidListService.validate(bid);
         return "redirect:/bidList/list";
     }
 

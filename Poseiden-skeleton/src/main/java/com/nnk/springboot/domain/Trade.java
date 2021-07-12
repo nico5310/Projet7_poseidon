@@ -18,34 +18,31 @@ public class Trade implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer tradeId ;
+    Integer tradeId;
 
-    @NotNull(message = "Account is mandatory")
-    String account ;
+    @NotNull(message = "Account is mandatory") String account;
 
-    @NotNull(message = "Type is mandatory")
-    String type ;
+    @NotNull(message = "Type is mandatory") String type;
 
-    @NotNull(message = "buyQuantity is mandatory")
-    Double buyQuantity ;
+    @NotNull(message = "buyQuantity is mandatory") Double buyQuantity;
 
-    Double sellQuantity ;
-    Double buyPrice ;
-    Double sellPrice ;
-    String benchmark ;
-    Timestamp tradeDate ;
-    String security ;
-    String status ;
-    String trader ;
-    String book ;
-    String creationName ;
-    Timestamp creationDate ;
-    String revisionName ;
-    Timestamp revisionDate ;
-    String dealName ;
-    String dealType ;
-    String sourceListId ;
-    String side ;
+    Double    sellQuantity;
+    Double    buyPrice;
+    Double    sellPrice;
+    String    benchmark;
+    Timestamp tradeDate;
+    String    security;
+    String    status;
+    String    trader;
+    String    book;
+    String    creationName;
+    Timestamp creationDate;
+    String    revisionName;
+    Timestamp revisionDate;
+    String    dealName;
+    String    dealType;
+    String    sourceListId;
+    String    side;
 
     public Trade(String account, String type, Double buyQuantity) {
 

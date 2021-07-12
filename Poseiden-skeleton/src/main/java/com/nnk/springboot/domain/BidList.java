@@ -18,35 +18,35 @@ public class BidList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer bidListId ;
+    private Integer bidListId;
 
     @NotNull(message = "Account is mandatory")
-    private String account ;
+    private String account;
 
     @NotNull(message = "type is mandatory")
-    private String type ;
+    private String type;
 
     @NotNull(message = "bidQuantity is mandatory")
-    private Double bidQuantity ;
+    private Double bidQuantity;
 
-    private Double askQuantity ;
-    private Double bid ;
-    private Double ask ;
-    private String benchmark ;
-    private Timestamp bidListDate ;
-    private String commentary ;
-    private String security ;
-    private String status ;
-    private String trader ;
-    private String book ;
-    private String creationName ;
-    private Timestamp creationDate ;
-    private String revisionName ;
-    private Timestamp revisionDate ;
-    private String dealName ;
-    private String dealType ;
-    private String sourceListId ;
-    private String side ;
+    private Double    askQuantity;
+    private Double    bid;
+    private Double    ask;
+    private String    benchmark;
+    private Timestamp bidListDate;
+    private String    commentary;
+    private String    security;
+    private String    status;
+    private String    trader;
+    private String    book;
+    private String    creationName;
+    private Timestamp creationDate;
+    private String    revisionName;
+    private Timestamp revisionDate;
+    private String    dealName;
+    private String    dealType;
+    private String    sourceListId;
+    private String    side;
 
     public BidList(String account, String type, Double bidQuantity) {
 
@@ -54,6 +54,7 @@ public class BidList implements Serializable {
         this.type        = type;
         this.bidQuantity = bidQuantity;
     }
+
     public BidList() {
 
     }

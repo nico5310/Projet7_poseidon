@@ -93,9 +93,8 @@ public class BidListServiceTest {
 
         //THEN
         verify(bidListRepository).findAll();
-        verify(bidListRepository).save(bidList1);
+        verify(bidListRepository).save((BidList) any());
         assertEquals(1, bidList1.getBidListId().intValue());
-        assertEquals(20.0, bidList1.getBidQuantity().doubleValue());
     }
 
     @Test

@@ -17,25 +17,19 @@ public class RuleName implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id ;
+    Integer id;
 
-    @NotNull(message = "Name not be null")
-    String name ;
+    @NotNull(message = "Name not be null") String name;
 
-    @NotNull(message = "Description not be null")
-    String description ;
+    @NotNull(message = "Description not be null") String description;
 
-    @NotNull(message = "Json not be null")
-    String json ;
+    @NotNull(message = "Json not be null") String json;
 
-    @NotNull(message = "template not be null")
-    String template ;
+    @NotNull(message = "template not be null") String template;
 
-    @NotNull(message = "sqlStr not be null")
-    String sqlStr ;
+    @NotNull(message = "sqlStr not be null") String sqlStr;
 
-    @NotNull(message = "sqlPart not be null")
-    String sqlPart ;
+    @NotNull(message = "sqlPart not be null") String sqlPart;
 
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
 

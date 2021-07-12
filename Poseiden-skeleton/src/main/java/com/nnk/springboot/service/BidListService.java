@@ -30,10 +30,10 @@ public class BidListService {
     /**
      * Add new bid
      */
-    public void validate(BidList bid, Model model) {
+    public void validate(BidList bid) {
         log.info("Add new bid to bid List");
         bidListRepository.save(bid);
-        model.addAttribute("bidList",bidListRepository.findAll());
+
 
     }
 
