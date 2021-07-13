@@ -57,9 +57,9 @@ public class CurvePointServiceTest {
         curvePoint.setTerm(10.0);
         curvePoint.setValue(10.0);
         //WHEN
-        curvePointService.validate(curvePoint, new ConcurrentModel());
+        when(curvePointRepository.save(curvePoint)).thenReturn(curvePoint);
+        curvePointService.validate(curvePoint);
         //THEN
-        verify(curvePointRepository).findAll();
         verify(curvePointRepository).save(curvePoint);
     }
 

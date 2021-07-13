@@ -15,15 +15,23 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint implements Serializable {
-
-    @NotNull(message = "CurveId must not be null") Integer curveId;
-    Timestamp asOfDate;
-    @NotNull(message = "Term must not be null") Double term;
-    @NotNull(message = "Value must not be null") Double value;
-    Timestamp creationDate;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull(message = "CurveId must not be null")
+    Integer curveId;
+
+        @NotNull(message = "Term must not be null")
+    Double term;
+
+    @NotNull(message = "Value must not be null")
+    Double value;
+
+
+    Timestamp asOfDate;
+    Timestamp creationDate;
+
 
 
     public CurvePoint(Integer curveId, Double term, Double value) {

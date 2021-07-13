@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.service.CurvePointService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class CurveController {
 
     @Autowired
     CurvePointService curvePointService;
+
+    @Autowired
+    CurvePointRepository curvePointRepository;
 
     /**
      * Show curve HomePage
@@ -56,7 +60,8 @@ public class CurveController {
             return "curvePoint/add";
         }
         log.info("SUCCESS, Add new curvepoint to curvePointList");
-        curvePointService.validate(curvePoint, model);
+        model.addAttribute("curvePoint", curvePointRepository.findAll());
+        curvePointService.validate(curvePoint);
         return "redirect:/curvePoint/list";
     }
 

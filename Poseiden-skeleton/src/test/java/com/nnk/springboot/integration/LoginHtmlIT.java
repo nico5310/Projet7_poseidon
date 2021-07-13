@@ -1,6 +1,5 @@
-package com.nnk.springboot.integrations;
+package com.nnk.springboot.integration;
 
-import com.nnk.springboot.repositories.CurvePointRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

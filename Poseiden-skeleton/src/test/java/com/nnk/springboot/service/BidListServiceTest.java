@@ -49,6 +49,7 @@ public class BidListServiceTest {
         bidList.setType("Type");
         bidList.setBidQuantity(10.0);
         //WHEN
+//        bidListService.validate(bidList, new ConcurrentModel());
         when(bidListRepository.save(bidList)).thenReturn(bidList);
         bidListService.validate(bidList);
         //THEN

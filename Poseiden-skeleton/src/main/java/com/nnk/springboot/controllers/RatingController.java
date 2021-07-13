@@ -56,14 +56,12 @@ public class RatingController {
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
 
-        List<Rating> ratingList = ratingRepository.findAll();
-        model.addAttribute("rating", ratingRepository.findAll());
-
         if (result.hasErrors()) {
             log.error("ERROR, Add new rating isn't possible");
             return "/rating/add";
         }
         log.info("SUCCESS, Add new rating to ratingList");
+        model.addAttribute("rating", ratingRepository.findAll());
         ratingService.validate(rating);
         return "redirect:/rating/list";
     }

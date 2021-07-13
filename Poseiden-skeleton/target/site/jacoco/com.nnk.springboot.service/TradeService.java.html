@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TradeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.service</a> &gt; <span class="el_source">TradeService.java</span></div><h1>TradeService.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.service;
+
+import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.repositories.TradeRepository;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import javax.validation.Valid;
+
+/**
+ * Trade Service is CRUD methods of Trade
+ */
+<span class="fc" id="L14">@Log4j2</span>
+@Service
+<span class="fc" id="L16">public class TradeService {</span>
+
+    @Autowired
+    TradeRepository tradeRepository;
+
+    /**
+     * Show Trade List
+     * @return all trade
+     */
+    public String home (Model model) {
+<span class="nc" id="L26">        log.info(&quot;Show trade list&quot;);</span>
+<span class="nc" id="L27">        model.addAttribute(&quot;trade&quot;, tradeRepository.findAll());</span>
+<span class="nc" id="L28">        return &quot;trade/list&quot;;</span>
+    }
+
+    /**
+     * Add new trade
+     */
+    public void validate (@Valid Trade trade) {
+<span class="nc" id="L35">        log.info(&quot;Add new trade to bid List&quot;);</span>
+<span class="nc" id="L36">        tradeRepository.save(trade);</span>
+<span class="nc" id="L37">    }</span>
+
+    /**
+     * Show update form
+     */
+    public void showUpdateForm(Integer tradeId, Model model) {
+<span class="nc" id="L43">        log.info(&quot;Find trade by id to BidList&quot;);</span>
+<span class="nc" id="L44">        Trade trade  = tradeRepository.findById(tradeId).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ID:&quot;+ tradeId));</span>
+<span class="nc" id="L45">        model.addAttribute(&quot;trade&quot;, trade);</span>
+<span class="nc" id="L46">    }</span>
+
+    /**
+     * Update trade by id
+     */
+    public void updateTrade(Integer tradeId, Trade trade, Model model) {
+<span class="nc" id="L52">        log.info(&quot;Update exist Bid by id&quot; + tradeId);</span>
+<span class="nc" id="L53">        trade.setTradeId(tradeId);</span>
+<span class="nc" id="L54">        tradeRepository.save(trade);</span>
+<span class="nc" id="L55">        model.addAttribute(&quot;trade&quot;,tradeRepository.findAll());</span>
+<span class="nc" id="L56">    }</span>
+
+    /**
+     * Delete trade by id
+     */
+    public void deleteTrade(Integer tradeId, Model model) {
+<span class="nc" id="L62">        log.info(&quot;Delete Trade by Id&quot; + tradeId);</span>
+<span class="nc" id="L63">        Trade trade = tradeRepository.findById(tradeId).orElseThrow(() -&gt;new IllegalArgumentException(&quot;Invalid ID:&quot; + tradeId));</span>
+<span class="nc" id="L64">        tradeRepository.delete(trade);</span>
+<span class="nc" id="L65">        model.addAttribute(&quot;trade&quot;, tradeRepository.findAll());</span>
+<span class="nc" id="L66">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

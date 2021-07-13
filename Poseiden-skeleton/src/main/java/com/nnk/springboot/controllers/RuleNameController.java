@@ -57,12 +57,12 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 
-        model.addAttribute("ruleName", ruleNameRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new ruleName isn't possible");
             return "/ruleName/add";
         }
         log.info("SUCCESS, Add new ruleName to ruleNameList");
+        model.addAttribute("ruleName", ruleNameRepository.findAll());
         ruleNameService.validate(ruleName);
         return "redirect:/ruleName/list";
     }

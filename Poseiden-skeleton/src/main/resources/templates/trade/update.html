@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label for="account" class="col-form-label">Account</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="account" placeholder="Account"
+					<input type="text" class="form-control" id="account" placeholder="Account" pattern="[A-Za-z\\s]*"
 						   th:field="*{account}">
 					<p class="text-danger" th:if="${#fields.hasErrors('account')}"
 					   th:errors="*{account}">Error account
@@ -31,7 +31,7 @@
 			<div class="form-group">
 				<label for="type" class="col-form-label">Type</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="type" placeholder="Type"
+					<input type="text" class="form-control" id="type" placeholder="Type" pattern="[A-Za-z\\s]*"
 						   th:field="*{type}">
 					<p class="text-danger" th:if="${#fields.hasErrors('type')}"
 					   th:errors="*{type}">Error type
@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<label for="buyQuantity" class="col-form-label">Buy quantity</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="buyQuantity" placeholder="Bid quantity"
+					<input type="text" class="form-control" id="buyQuantity" placeholder="Bid quantity" pattern="[0-9,.\\s]*"
 						   th:field="*{buyQuantity}">
 					<p class="text-danger" th:if="${#fields.hasErrors('buyQuantity')}"
 					   th:errors="*{buyQuantity}">Error buyQuantity

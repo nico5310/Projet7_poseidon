@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -20,10 +21,10 @@ public class BidList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
 
-    @NotNull(message = "Account is mandatory")
+    @NotBlank(message = "Account is mandatory")
     private String account;
 
-    @NotNull(message = "type is mandatory")
+    @NotBlank(message = "type is mandatory")
     private String type;
 
     @NotNull(message = "bidQuantity is mandatory")

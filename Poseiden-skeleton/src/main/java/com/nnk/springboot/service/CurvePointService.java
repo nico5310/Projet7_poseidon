@@ -31,10 +31,10 @@ public class CurvePointService {
     /**
      * Add curvePoint
      */
-    public void validate (@Valid CurvePoint curvePoint, Model model) {
+    public void validate (@Valid CurvePoint curvePoint) {
         log.info("Add new curvePoint to curvePointList");
         curvePointRepository.save(curvePoint);
-        model.addAttribute("curvePoint", curvePointRepository.findAll());
+
     }
 
     /**

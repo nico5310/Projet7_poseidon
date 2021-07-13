@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="name" class="col-form-label">Name</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="name" placeholder="Name"
+					<input type="text" class="form-control" id="name" placeholder="Name" pattern="[A-Za-z\\s]*"
 						   th:field="*{name}">
 					<p class="text-danger" th:if="${#fields.hasErrors('name')}"
 					   th:errors="*{name}">Error name
@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label for="description" class="col-form-label">Description</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="description" placeholder="Description"
+					<input type="text" class="form-control" id="description" placeholder="Description" pattern="[A-Za-z\\s]*"
 						   th:field="*{description}">
 					<p class="text-danger" th:if="${#fields.hasErrors('description')}"
 					   th:errors="*{description}">Error description
@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label for="json" class="col-form-label">Json</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="json" placeholder="Json"
+					<input type="text" class="form-control" id="json" placeholder="Json" pattern="[A-Za-z\\s]*"
 						   th:field="*{json}">
 					<p class="text-danger" th:if="${#fields.hasErrors('json')}"
 					   th:errors="*{json}">Error json
@@ -54,7 +54,7 @@
 			<div class="form-group">
 				<label for="template" class="col-form-label">Template</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="template" placeholder="Template"
+					<input type="text" class="form-control" id="template" placeholder="Template" pattern="[A-Za-z\\s]*"
 						   th:field="*{template}">
 					<p class="text-danger" th:if="${#fields.hasErrors('template')}"
 					   th:errors="*{template}">Error template
@@ -65,7 +65,7 @@
 			<div class="form-group">
 				<label for="sqlStr" class="col-form-label">sql</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="sqlStr" placeholder="sqlStr"
+					<input type="text" class="form-control" id="sqlStr" placeholder="sqlStr" pattern="[A-Za-z\\s]*"
 						   th:field="*{sqlStr}">
 					<p class="text-danger" th:if="${#fields.hasErrors('sqlStr')}"
 					   th:errors="*{sqlStr}">Error sqlStr
@@ -76,7 +76,7 @@
 			<div class="form-group">
 				<label for="sqlPart" class="col-form-label">sqlPart</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="sqlPart" placeholder="sqlPart"
+					<input type="text" class="form-control" id="sqlPart" placeholder="sqlPart" pattern="[A-Za-z\\s]*"
 						   th:field="*{sqlPart}">
 					<p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}"
 					   th:errors="*{sqlPart}">Error sqlPart

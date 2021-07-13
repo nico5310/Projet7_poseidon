@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="curveId" class="col-form-label">Curve Id</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="curveId" placeholder="Curve Id"
+					<input type="text" class="form-control" id="curveId" placeholder="Curve Id" pattern="[0-9,.\\s]*"
 						   th:field="*{curveId}">
 					<p class="text-danger" th:if="${#fields.hasErrors('curveId')}"
 					   th:errors="*{curveId}">Error curveId
@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label for="term" class="col-form-label">Term</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="term" placeholder="Term"
+					<input type="text" class="form-control" id="term" placeholder="Term" pattern="[0-9,.\\s]*"
 						   th:field="*{term}">
 					<p class="text-danger" th:if="${#fields.hasErrors('term')}"
 					   th:errors="*{term}">Error term
@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label for="value" class="col-form-label">Value</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="value" placeholder="Value"
+					<input type="text" class="form-control" id="value" placeholder="Value" pattern="[0-9,.\\s]*"
 						   th:field="*{value}">
 					<p class="text-danger" th:if="${#fields.hasErrors('value')}"
 					   th:errors="*{value}">Error value

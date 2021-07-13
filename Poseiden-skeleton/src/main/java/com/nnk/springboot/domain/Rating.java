@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -21,12 +22,15 @@ public class Rating implements Serializable {
     Integer id;
 
     @NotNull(message = "MoodysRating is mandatory")
+    @NotBlank(message = "template not be blank")
     String moodysRating;
 
     @NotNull(message = "SandPRating is mandatory")
+    @NotBlank(message = "template not be blank")
     String sandPRating;
 
     @NotNull(message = "FitchRating is mandatory")
+    @NotBlank(message = "template not be blank")
     String fitchRating;
 
     @NotNull(message = "OrderNumber is mandatory")

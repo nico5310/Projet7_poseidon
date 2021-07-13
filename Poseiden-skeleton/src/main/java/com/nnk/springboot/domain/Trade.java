@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -20,11 +21,16 @@ public class Trade implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer tradeId;
 
-    @NotNull(message = "Account is mandatory") String account;
+    @NotNull(message = "Account is mandatory")
+    @NotBlank(message = "template not be blank")
+    String account;
 
-    @NotNull(message = "Type is mandatory") String type;
+    @NotNull(message = "Type is mandatory")
+    @NotBlank(message = "template not be blank")
+    String type;
 
-    @NotNull(message = "buyQuantity is mandatory") Double buyQuantity;
+    @NotNull(message = "buyQuantity is mandatory")
+    Double buyQuantity;
 
     Double    sellQuantity;
     Double    buyPrice;

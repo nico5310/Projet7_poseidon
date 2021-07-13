@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.domain</a> &gt; <span class="el_source">BidList.java</span></div><h1>BidList.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+<span class="fc" id="L12">@Log4j2</span>
+@Getter
+<span class="pc" id="L14">@Setter</span>
+@Entity
+@Table(name = &quot;bidlist&quot;)
+public class BidList implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<span class="fc" id="L21">    private Integer bidListId;</span>
+
+    @NotNull(message = &quot;Account is mandatory&quot;)
+<span class="nc" id="L24">    private String account;</span>
+
+    @NotNull(message = &quot;type is mandatory&quot;)
+<span class="nc" id="L27">    private String type;</span>
+
+    @NotNull(message = &quot;bidQuantity is mandatory&quot;)
+<span class="fc" id="L30">    private Double bidQuantity;</span>
+
+<span class="nc" id="L32">    private Double    askQuantity;</span>
+<span class="nc" id="L33">    private Double    bid;</span>
+<span class="nc" id="L34">    private Double    ask;</span>
+<span class="nc" id="L35">    private String    benchmark;</span>
+<span class="nc" id="L36">    private Timestamp bidListDate;</span>
+<span class="nc" id="L37">    private String    commentary;</span>
+<span class="nc" id="L38">    private String    security;</span>
+<span class="nc" id="L39">    private String    status;</span>
+<span class="nc" id="L40">    private String    trader;</span>
+<span class="nc" id="L41">    private String    book;</span>
+<span class="nc" id="L42">    private String    creationName;</span>
+<span class="nc" id="L43">    private Timestamp creationDate;</span>
+<span class="nc" id="L44">    private String    revisionName;</span>
+<span class="nc" id="L45">    private Timestamp revisionDate;</span>
+<span class="nc" id="L46">    private String    dealName;</span>
+<span class="nc" id="L47">    private String    dealType;</span>
+<span class="nc" id="L48">    private String    sourceListId;</span>
+<span class="nc" id="L49">    private String    side;</span>
+
+<span class="nc" id="L51">    public BidList(String account, String type, Double bidQuantity) {</span>
+
+<span class="nc" id="L53">        this.account     = account;</span>
+<span class="nc" id="L54">        this.type        = type;</span>
+<span class="nc" id="L55">        this.bidQuantity = bidQuantity;</span>
+<span class="nc" id="L56">    }</span>
+
+<span class="fc" id="L58">    public BidList() {</span>
+
+<span class="fc" id="L60">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

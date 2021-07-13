@@ -55,12 +55,12 @@ public class TradeController {
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
 
-        model.addAttribute("trade", tradeRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new trade isn't possible");
             return "/trade/add";
         }
         log.info("SUCCESS, Add new trade to BidList");
+        model.addAttribute("trade", tradeRepository.findAll());
         tradeService.validate(trade);
         return "redirect:/trade/list";
     }
