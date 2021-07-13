@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="moodysRating" class="col-form-label">MoodysRating</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="moodysRating" placeholder="MoodysRating"
+					<input type="text" class="form-control" id="moodysRating" placeholder="MoodysRating" pattern="[A-Za-z\\s]*"
 						   th:field="*{moodysRating}">
 					<p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}"
 					   th:errors="*{moodysRating}">Error moodysRating
@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label for="sandPRating" class="col-form-label">SandPRating</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="sandPRating" placeholder="SandPRating"
+					<input type="text" class="form-control" id="sandPRating" placeholder="SandPRating" pattern="[A-Za-z\\s]*"
 						   th:field="*{sandPRating}">
 					<p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}"
 					   th:errors="*{sandPRating}">Error sandPRating
@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label for="fitchRating" class="col-form-label">FitchRating</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="fitchRating" placeholder="FitchRating"
+					<input type="text" class="form-control" id="fitchRating" placeholder="FitchRating" pattern="[A-Za-z\\s]*"
 						   th:field="*{fitchRating}">
 					<p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}"
 					   th:errors="*{fitchRating}">Error fitchRating
@@ -54,7 +54,7 @@
 			<div class="form-group">
 				<label for="orderNumber" class="col-form-label">Order Number</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" id="orderNumber" placeholder="OrderNumber"
+					<input type="text" class="form-control" id="orderNumber" placeholder="OrderNumber" pattern="[0-9,.\\s]*"
 						   th:field="*{orderNumber}">
 					<p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}"
 					   th:errors="*{orderNumber}">Error orderNumber
