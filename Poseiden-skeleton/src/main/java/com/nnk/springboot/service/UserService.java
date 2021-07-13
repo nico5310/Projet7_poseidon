@@ -40,12 +40,12 @@ public class UserService {
     /**
      * Add new user
      */
-    public void validate (User user, Model model) {
+    public void validate (User user) {
         log.info("Add new user to user List");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
+
     }
 
     /**

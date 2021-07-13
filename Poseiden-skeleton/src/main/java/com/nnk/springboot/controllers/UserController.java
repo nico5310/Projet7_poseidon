@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.security.PasswordValidator;
 import com.nnk.springboot.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -22,6 +23,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
     /**
      * Show userList HomePage
      * @return the list of user
@@ -49,6 +52,7 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
 
+        model.addAttribute("users", userRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new user isn't possible");
             return "/user/add";
@@ -59,7 +63,7 @@ public class UserController {
             return"/user/add";
         }else {
             log.info("SUCCESS, add new User");
-            userService.validate(user, model);
+            userService.validate(user);
             return "redirect:/user/list";
         }
 

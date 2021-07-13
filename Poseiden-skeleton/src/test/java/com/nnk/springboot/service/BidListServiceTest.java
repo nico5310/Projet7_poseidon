@@ -1,18 +1,16 @@
 package com.nnk.springboot.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,8 +30,11 @@ public class BidListServiceTest {
     @Test
     @DisplayName("HomeBidList test")
     public void homeBidListTest() {
-
-        when(bidListRepository.findAll()).thenReturn(new ArrayList<BidList>());
+        //GIVEN
+        List<BidList> bidList = new ArrayList<>();
+        //WHEN
+        when(bidListRepository.findAll()).thenReturn(bidList);
+        //THEN
         assertEquals("bidList/list", bidListService.home(new ConcurrentModel()));
         verify(bidListRepository).findAll();
     }
@@ -64,16 +65,15 @@ public class BidListServiceTest {
         bidList.setAccount("Account");
         bidList.setType("Type");
         bidList.setBidQuantity(10.0);
-        Optional<BidList> ofResult = Optional.<BidList>of(bidList);
         //WHEN
-        when(this.bidListRepository.findById((Integer) any())).thenReturn(ofResult);
+        when(bidListRepository.findById(1)).thenReturn(Optional.of(bidList));
         bidListService.showUpdateForm(1, new ConcurrentModel());
         //THEN
-        verify(bidListRepository).findById((Integer) any());
+        verify(bidListRepository).findById(1);
     }
 
     @Test
-    @DisplayName("updateBid test")
+    @DisplayName("update BidList test")
     public void updateBidTest() {
         //GIVEN
         BidList bidList = new BidList();
@@ -81,20 +81,23 @@ public class BidListServiceTest {
         bidList.setAccount("Account");
         bidList.setType("Type");
         bidList.setBidQuantity(10.0);
-        when(bidListRepository.findAll()).thenReturn(new ArrayList<BidList>());
+        List<BidList> bidListList = new ArrayList<>();
+        when(bidListRepository.findAll()).thenReturn(bidListList);
         when(bidListRepository.save(bidList)).thenReturn(bidList);
         BidList bidList1 = new BidList();
-        bidList.setBidListId(1);
-        bidList.setAccount("Account");
-        bidList.setType("Type");
-        bidList.setBidQuantity(20.0);
+        bidList1.setBidListId(1);
+        bidList1.setAccount("Account");
+        bidList1.setType("Type");
+        bidList1.setBidQuantity(20.0);
         bidListService.updateBid(1, bidList1, new ConcurrentModel());
         //WHEN
 
         //THEN
         verify(bidListRepository).findAll();
-        verify(bidListRepository).save((BidList) any());
+        verify(bidListRepository).save(bidList1);
         assertEquals(1, bidList1.getBidListId().intValue());
+        assertEquals(20.0, bidList1.getBidQuantity().intValue());
+
     }
 
     @Test

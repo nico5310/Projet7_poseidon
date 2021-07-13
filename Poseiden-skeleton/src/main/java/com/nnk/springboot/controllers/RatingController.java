@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.RatingService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Rating Controller is CRUD methods for Rating
@@ -22,6 +24,9 @@ public class RatingController {
 
     @Autowired
     RatingService ratingService;
+
+    @Autowired
+    RatingRepository ratingRepository;
 
     /**
      * Show rating HomePage
@@ -50,12 +55,16 @@ public class RatingController {
      */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
+
+        List<Rating> ratingList = ratingRepository.findAll();
+        model.addAttribute("rating", ratingRepository.findAll());
+
         if (result.hasErrors()) {
             log.error("ERROR, Add new rating isn't possible");
             return "/rating/add";
         }
         log.info("SUCCESS, Add new rating to ratingList");
-        ratingService.validate(rating, model);
+        ratingService.validate(rating);
         return "redirect:/rating/list";
     }
 

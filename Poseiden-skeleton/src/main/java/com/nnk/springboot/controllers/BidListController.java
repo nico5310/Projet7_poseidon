@@ -21,10 +21,10 @@ import java.util.List;
 public class BidListController {
 
     @Autowired
-    BidListService bidListService;
+    private BidListService bidListService;
 
     @Autowired
-    BidListRepository bidListRepository;
+    private BidListRepository bidListRepository;
 
     /**
      * Show bidList HomePage

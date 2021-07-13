@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * RuleName Controller is CRUD methods for RuleName
@@ -22,7 +23,10 @@ import javax.validation.Valid;
 public class RuleNameController {
 
     @Autowired
-    RuleNameService ruleNameService;
+    private RuleNameService ruleNameService;
+
+    @Autowired
+    private RuleNameRepository ruleNameRepository;
 
 
     /**
@@ -53,12 +57,13 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 
+        model.addAttribute("ruleName", ruleNameRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new ruleName isn't possible");
             return "/ruleName/add";
         }
         log.info("SUCCESS, Add new ruleName to ruleNameList");
-        ruleNameService.validate(ruleName, model);
+        ruleNameService.validate(ruleName);
         return "redirect:/ruleName/list";
     }
 

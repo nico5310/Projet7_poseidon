@@ -31,10 +31,9 @@ public class RatingService {
     /**
      * Add new rating
      */
-    public void validate (@Valid Rating rating, Model model) {
+    public void validate (@Valid Rating rating) {
         log.info("Add new rating to bid List");
         ratingRepository.save(rating);
-        model.addAttribute("rating", ratingRepository.findAll());
     }
 
     /**

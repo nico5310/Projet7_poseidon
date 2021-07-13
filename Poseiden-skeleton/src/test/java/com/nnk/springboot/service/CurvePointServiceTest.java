@@ -13,6 +13,7 @@ import com.nnk.springboot.repositories.CurvePointRepository;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -37,8 +38,11 @@ public class CurvePointServiceTest {
     @Test
     @DisplayName("HomeCurvePoint test")
     public void HomeCurvePointTest() {
-
+        //GIVEN
+        List<CurvePoint> curvePointList = new ArrayList<>();
+        //WHEN
         when(curvePointRepository.findAll()).thenReturn(new ArrayList<CurvePoint>());
+        //THEN
         assertEquals("curvePoint/list", curvePointService.home(new ConcurrentModel()));
         verify(curvePointRepository).findAll();
     }
@@ -70,10 +74,9 @@ public class CurvePointServiceTest {
         curvePoint.setTerm(10.0);
         curvePoint.setValue(10.0);
         //WHEN
-        Optional<CurvePoint> ofResult = Optional.<CurvePoint>of(curvePoint);
-        when(curvePointRepository.findById((Integer) any())).thenReturn(ofResult);
-        //THEN
+        when(curvePointRepository.findById(1)).thenReturn(Optional.of(curvePoint));
         curvePointService.showUpdateForm(1, new ConcurrentModel());
+        //THEN
         verify(curvePointRepository).findById(1);
     }
 
@@ -86,8 +89,9 @@ public class CurvePointServiceTest {
         curvePoint.setCurveId(1);
         curvePoint.setTerm(10.0);
         curvePoint.setValue(10.0);
-        when(curvePointRepository.findAll()).thenReturn(new ArrayList<CurvePoint>());
-        when(curvePointRepository.save((CurvePoint) any())).thenReturn(curvePoint);
+        List<CurvePoint> curvePointList = new ArrayList<>();
+        when(curvePointRepository.findAll()).thenReturn(curvePointList);
+        when(curvePointRepository.save(curvePoint)).thenReturn(curvePoint);
         CurvePoint curvePoint1 = new CurvePoint();
         curvePoint1.setId(1);
         curvePoint1.setCurveId(1);
@@ -105,7 +109,8 @@ public class CurvePointServiceTest {
     }
 
     @Test
-    public void testDeleteCurvePoint() {
+    @DisplayName("Delete CurvePoint test")
+    public void deleteCurvePointTest() {
         //GIVEN
         CurvePoint curvePoint = new CurvePoint();
         curvePoint.setId(1);
@@ -115,7 +120,7 @@ public class CurvePointServiceTest {
         //WHEN
         curvePointRepository.deleteById(1);
         //THEN
-        verify(this.curvePointRepository).deleteById(1);
+        verify(curvePointRepository).deleteById(1);
 
     }
 

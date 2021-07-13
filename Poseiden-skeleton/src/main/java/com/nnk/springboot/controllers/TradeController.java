@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.service.TradeService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class TradeController {
 
     @Autowired
     TradeService tradeService;
+
+    @Autowired
+    private TradeRepository tradeRepository;
 
     /**
      * Show trade HomePage
@@ -50,12 +54,14 @@ public class TradeController {
      */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
+
+        model.addAttribute("trade", tradeRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new trade isn't possible");
             return "/trade/add";
         }
         log.info("SUCCESS, Add new trade to BidList");
-        tradeService.validate(trade, model);
+        tradeService.validate(trade);
         return "redirect:/trade/list";
     }
 

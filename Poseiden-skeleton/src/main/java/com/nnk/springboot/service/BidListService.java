@@ -33,8 +33,6 @@ public class BidListService {
     public void validate(BidList bid) {
         log.info("Add new bid to bid List");
         bidListRepository.save(bid);
-
-
     }
 
     /**

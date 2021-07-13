@@ -31,10 +31,10 @@ public class RuleNameService {
     /**
      * Add new ruleName
      */
-    public void validate (@Valid RuleName ruleName, Model model) {
+    public void validate (@Valid RuleName ruleName) {
         log.info("Add new ruleName to ruleNameList");
         ruleNameRepository.save(ruleName);
-        model.addAttribute("ruleName", ruleNameRepository.findAll());
+
     }
 
     /**

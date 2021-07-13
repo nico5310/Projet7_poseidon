@@ -90,10 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider())
             .inMemoryAuthentication()
-            .withUser("user")
-                .password(passwordEncoder().encode("Poseidon1@"))
-                .roles("USER")
-                .and()
+//            .withUser("user")
+//                .password(passwordEncoder().encode("Poseidon1@"))
+//                .roles("USER")
+//                .and()
             .withUser("admin")
                 .password(passwordEncoder().encode("Poseidon1@"))
                 .roles("ADMIN");

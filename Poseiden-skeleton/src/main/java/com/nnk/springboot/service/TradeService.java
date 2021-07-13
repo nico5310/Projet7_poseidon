@@ -31,10 +31,9 @@ public class TradeService {
     /**
      * Add new trade
      */
-    public void validate (@Valid Trade trade, Model model) {
+    public void validate (@Valid Trade trade) {
         log.info("Add new trade to bid List");
         tradeRepository.save(trade);
-        model.addAttribute("trade", tradeRepository.findAll());
     }
 
     /**

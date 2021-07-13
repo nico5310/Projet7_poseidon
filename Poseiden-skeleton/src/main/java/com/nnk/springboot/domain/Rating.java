@@ -20,13 +20,17 @@ public class Rating implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @NotNull(message = "MoodysRating is mandatory") String moodysRating;
+    @NotNull(message = "MoodysRating is mandatory")
+    String moodysRating;
 
-    @NotNull(message = "SandPRating is mandatory") String sandPRating;
+    @NotNull(message = "SandPRating is mandatory")
+    String sandPRating;
 
-    @NotNull(message = "FitchRating is mandatory") String fitchRating;
+    @NotNull(message = "FitchRating is mandatory")
+    String fitchRating;
 
-    @NotNull(message = "OrderNumber is mandatory") Integer orderNumber;
+    @NotNull(message = "OrderNumber is mandatory")
+    Integer orderNumber;
 
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
