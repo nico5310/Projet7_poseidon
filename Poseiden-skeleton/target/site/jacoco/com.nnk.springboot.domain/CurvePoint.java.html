@@ -15,27 +15,35 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = &quot;curvepoint&quot;)
 public class CurvePoint implements Serializable {
-
-<span class="fc" id="L19">    @NotNull(message = &quot;CurveId must not be null&quot;) Integer curveId;</span>
-<span class="nc" id="L20">    Timestamp asOfDate;</span>
-<span class="nc" id="L21">    @NotNull(message = &quot;Term must not be null&quot;) Double term;</span>
-<span class="nc" id="L22">    @NotNull(message = &quot;Value must not be null&quot;) Double value;</span>
-<span class="nc" id="L23">    Timestamp creationDate;</span>
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<span class="fc" id="L26">    private Integer id;</span>
+<span class="fc" id="L20">    private Integer id;</span>
+
+    @NotNull(message = &quot;CurveId must not be null&quot;)
+<span class="fc" id="L23">    Integer curveId;</span>
+
+        @NotNull(message = &quot;Term must not be null&quot;)
+<span class="nc" id="L26">    Double term;</span>
+
+    @NotNull(message = &quot;Value must not be null&quot;)
+<span class="nc" id="L29">    Double value;</span>
 
 
-<span class="nc" id="L29">    public CurvePoint(Integer curveId, Double term, Double value) {</span>
+<span class="nc" id="L32">    Timestamp asOfDate;</span>
+<span class="nc" id="L33">    Timestamp creationDate;</span>
 
-<span class="nc" id="L31">        this.curveId = curveId;</span>
-<span class="nc" id="L32">        this.term    = term;</span>
-<span class="nc" id="L33">        this.value   = value;</span>
-<span class="nc" id="L34">    }</span>
 
-<span class="fc" id="L36">    public CurvePoint() {</span>
 
-<span class="fc" id="L38">    }</span>
+<span class="nc" id="L37">    public CurvePoint(Integer curveId, Double term, Double value) {</span>
+
+<span class="nc" id="L39">        this.curveId = curveId;</span>
+<span class="nc" id="L40">        this.term    = term;</span>
+<span class="nc" id="L41">        this.value   = value;</span>
+<span class="nc" id="L42">    }</span>
+
+<span class="fc" id="L44">    public CurvePoint() {</span>
+
+<span class="fc" id="L46">    }</span>
 
 
 }

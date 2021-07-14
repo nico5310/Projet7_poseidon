@@ -4,11 +4,14 @@ package com.nnk.springboot;
 import org.junit.jupiter.params.ParameterizedTest;
 import com.nnk.springboot.security.PasswordValidator;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SpringBootTest
 public class PasswordValidatorTest {
 
     @ParameterizedTest(name = "#{index} - Run test with password = {0}")

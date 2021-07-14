@@ -58,7 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .hasAnyAuthority("ADMIN", "USER")
                     .antMatchers("/user/**").authenticated()
 //                    .hasAnyAuthority("ADMIN")
-
                 /*
                  * Login Setup
                  */
@@ -68,7 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/bidList/list")
-
                 /*
                 * Logout
                  */

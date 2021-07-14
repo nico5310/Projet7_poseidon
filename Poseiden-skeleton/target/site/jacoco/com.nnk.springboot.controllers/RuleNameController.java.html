@@ -57,12 +57,12 @@ import java.util.List;
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
 
-<span class="nc" id="L60">        model.addAttribute(&quot;ruleName&quot;, ruleNameRepository.findAll());</span>
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
-<span class="nc" id="L62">            log.error(&quot;ERROR, Add new ruleName isn't possible&quot;);</span>
-<span class="nc" id="L63">            return &quot;/ruleName/add&quot;;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L61">            log.error(&quot;ERROR, Add new ruleName isn't possible&quot;);</span>
+<span class="nc" id="L62">            return &quot;/ruleName/add&quot;;</span>
         }
-<span class="nc" id="L65">        log.info(&quot;SUCCESS, Add new ruleName to ruleNameList&quot;);</span>
+<span class="nc" id="L64">        log.info(&quot;SUCCESS, Add new ruleName to ruleNameList&quot;);</span>
+<span class="nc" id="L65">        model.addAttribute(&quot;ruleName&quot;, ruleNameRepository.findAll());</span>
 <span class="nc" id="L66">        ruleNameService.validate(ruleName);</span>
 <span class="nc" id="L67">        return &quot;redirect:/ruleName/list&quot;;</span>
     }

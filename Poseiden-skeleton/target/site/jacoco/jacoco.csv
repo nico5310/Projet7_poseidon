@@ -1,10 +1,10 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 spring-boot-skeleton,com.nnk.springboot.controllers,LoginController,43,7,0,0,14,2,3,2,3,2
 spring-boot-skeleton,com.nnk.springboot.controllers,HomeController,10,7,0,0,4,2,2,2,2,2
-spring-boot-skeleton,com.nnk.springboot.controllers,CurveController,93,7,4,0,23,2,8,2,6,2
+spring-boot-skeleton,com.nnk.springboot.controllers,CurveController,99,7,4,0,24,2,8,2,6,2
 spring-boot-skeleton,com.nnk.springboot.controllers,UserController,105,7,8,0,31,2,10,2,6,2
-spring-boot-skeleton,com.nnk.springboot.controllers,BidListController,103,7,4,0,25,2,8,2,6,2
-spring-boot-skeleton,com.nnk.springboot.controllers,RatingController,103,7,4,0,25,2,8,2,6,2
+spring-boot-skeleton,com.nnk.springboot.controllers,BidListController,99,7,4,0,24,2,8,2,6,2
+spring-boot-skeleton,com.nnk.springboot.controllers,RatingController,99,7,4,0,24,2,8,2,6,2
 spring-boot-skeleton,com.nnk.springboot.controllers,TradeController,99,7,4,0,24,2,8,2,6,2
 spring-boot-skeleton,com.nnk.springboot.controllers,RuleNameController,99,7,4,0,24,2,8,2,6,2
 spring-boot-skeleton,com.nnk.springboot.service,RuleNameService,120,7,0,0,20,2,7,2,7,2
@@ -12,7 +12,7 @@ spring-boot-skeleton,com.nnk.springboot.service,TradeService,120,7,0,0,20,2,7,2,
 spring-boot-skeleton,com.nnk.springboot.service,UserDetailsConfigService,38,7,2,0,9,2,2,2,1,2
 spring-boot-skeleton,com.nnk.springboot.service,RatingService,120,7,0,0,20,2,7,2,7,2
 spring-boot-skeleton,com.nnk.springboot.service,BidListService,120,7,0,0,20,2,7,2,7,2
-spring-boot-skeleton,com.nnk.springboot.service,CurvePointService,127,7,0,0,21,2,7,2,7,2
+spring-boot-skeleton,com.nnk.springboot.service,CurvePointService,120,7,0,0,20,2,7,2,7,2
 spring-boot-skeleton,com.nnk.springboot.service,UserService,143,7,0,0,25,2,7,2,7,2
 spring-boot-skeleton,com.nnk.springboot.security,SecurityConfig,0,196,0,0,0,37,0,5,0,5
 spring-boot-skeleton,com.nnk.springboot.security,PasswordValidator,20,0,0,0,6,0,3,0,3,0

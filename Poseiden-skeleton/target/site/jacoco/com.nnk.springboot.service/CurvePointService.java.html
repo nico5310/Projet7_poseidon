@@ -31,10 +31,10 @@ import javax.validation.Valid;
     /**
      * Add curvePoint
      */
-    public void validate (@Valid CurvePoint curvePoint, Model model) {
+    public void validate (@Valid CurvePoint curvePoint) {
 <span class="nc" id="L35">        log.info(&quot;Add new curvePoint to curvePointList&quot;);</span>
 <span class="nc" id="L36">        curvePointRepository.save(curvePoint);</span>
-<span class="nc" id="L37">        model.addAttribute(&quot;curvePoint&quot;, curvePointRepository.findAll());</span>
+
 <span class="nc" id="L38">    }</span>
 
     /**

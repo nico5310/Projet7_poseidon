@@ -5,12 +5,13 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-<span class="fc" id="L11">@Log4j2</span>
+<span class="fc" id="L12">@Log4j2</span>
 @Getter
-<span class="pc" id="L13">@Setter</span>
+<span class="pc" id="L14">@Setter</span>
 @Entity
 @Table(name = &quot;rating&quot;)
 public class Rating implements Serializable {
@@ -18,31 +19,34 @@ public class Rating implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<span class="fc" id="L21">    Integer id;</span>
+<span class="fc" id="L22">    Integer id;</span>
 
     @NotNull(message = &quot;MoodysRating is mandatory&quot;)
-<span class="nc" id="L24">    String moodysRating;</span>
+    @NotBlank(message = &quot;template not be blank&quot;)
+<span class="nc" id="L26">    String moodysRating;</span>
 
     @NotNull(message = &quot;SandPRating is mandatory&quot;)
-<span class="nc" id="L27">    String sandPRating;</span>
+    @NotBlank(message = &quot;template not be blank&quot;)
+<span class="nc" id="L30">    String sandPRating;</span>
 
     @NotNull(message = &quot;FitchRating is mandatory&quot;)
-<span class="nc" id="L30">    String fitchRating;</span>
+    @NotBlank(message = &quot;template not be blank&quot;)
+<span class="nc" id="L34">    String fitchRating;</span>
 
     @NotNull(message = &quot;OrderNumber is mandatory&quot;)
-<span class="fc" id="L33">    Integer orderNumber;</span>
+<span class="fc" id="L37">    Integer orderNumber;</span>
 
 
-<span class="nc" id="L36">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
+<span class="nc" id="L40">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
 
-<span class="nc" id="L38">        this.moodysRating = moodysRating;</span>
-<span class="nc" id="L39">        this.sandPRating  = sandPRating;</span>
-<span class="nc" id="L40">        this.fitchRating  = fitchRating;</span>
-<span class="nc" id="L41">        this.orderNumber  = orderNumber;</span>
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L42">        this.moodysRating = moodysRating;</span>
+<span class="nc" id="L43">        this.sandPRating  = sandPRating;</span>
+<span class="nc" id="L44">        this.fitchRating  = fitchRating;</span>
+<span class="nc" id="L45">        this.orderNumber  = orderNumber;</span>
+<span class="nc" id="L46">    }</span>
 
-<span class="fc" id="L44">    public Rating() {</span>
+<span class="fc" id="L48">    public Rating() {</span>
 
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L50">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
