@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RatingService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.nnk.springboot.service</a>
+</div>
+
+<h1>Coverage Summary for Class: RatingService (com.nnk.springboot.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RatingService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.nnk.springboot.service;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.nnk.springboot.domain.Rating;
+<i class="no-highlight">4</i>&nbsp;import com.nnk.springboot.repositories.RatingRepository;
+<i class="no-highlight">5</i>&nbsp;import lombok.extern.log4j.Log4j2;
+<i class="no-highlight">6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i class="no-highlight">7</i>&nbsp;import org.springframework.stereotype.Service;
+<i class="no-highlight">8</i>&nbsp;import org.springframework.ui.Model;
+<i class="no-highlight">9</i>&nbsp;import javax.validation.Valid;
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;/**
+<i class="no-highlight">12</i>&nbsp; * Rating Service is CRUD methods of Rating
+<i class="no-highlight">13</i>&nbsp; */
+<b class="fc"><i class="no-highlight">14</i>&nbsp;@Log4j2</b>
+<i class="no-highlight">15</i>&nbsp;@Service
+<b class="fc"><i class="no-highlight">16</i>&nbsp;public class RatingService {</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    @Autowired
+<i class="no-highlight">19</i>&nbsp;    RatingRepository ratingRepository;
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;    /**
+<i class="no-highlight">22</i>&nbsp;     * Show Rating list
+<i class="no-highlight">23</i>&nbsp;     * @return
+<i class="no-highlight">24</i>&nbsp;     */
+<i class="no-highlight">25</i>&nbsp;    public String home (Model model) {
+<b class="fc"><i class="no-highlight">26</i>&nbsp;        log.info(&quot;Show rating list&quot;);</b>
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        model.addAttribute(&quot;rating&quot;, ratingRepository.findAll());</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        return &quot;rating/list&quot;;</b>
+<i class="no-highlight">29</i>&nbsp;    }
+<i class="no-highlight">30</i>&nbsp;
+<i class="no-highlight">31</i>&nbsp;    /**
+<i class="no-highlight">32</i>&nbsp;     * Add new rating
+<i class="no-highlight">33</i>&nbsp;     */
+<i class="no-highlight">34</i>&nbsp;    public void validate (@Valid Rating rating) {
+<b class="fc"><i class="no-highlight">35</i>&nbsp;        log.info(&quot;Add new rating to bid List&quot;);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;        ratingRepository.save(rating);</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    }</b>
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    /**
+<i class="no-highlight">40</i>&nbsp;     * Show update form
+<i class="no-highlight">41</i>&nbsp;     */
+<i class="no-highlight">42</i>&nbsp;    public void showUpdateForm(Integer id, Model model) {
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        log.info(&quot;Find rating by id to ratingList&quot;);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        Rating rating = ratingRepository.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid ID:&quot;+ id));</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        model.addAttribute(&quot;rating&quot;, rating);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;    }</b>
+<i class="no-highlight">47</i>&nbsp;
+<i class="no-highlight">48</i>&nbsp;    /**
+<i class="no-highlight">49</i>&nbsp;     * Update rating by id
+<i class="no-highlight">50</i>&nbsp;     */
+<i class="no-highlight">51</i>&nbsp;    public void updateRating(Integer id,@Valid Rating rating, Model model) {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        log.info(&quot;Update exist rating by id&quot; + id);</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        rating.setId(id);</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        ratingRepository.save(rating);</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        model.addAttribute(&quot;rating&quot;,ratingRepository.findAll());</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;    }</b>
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    /**
+<i class="no-highlight">59</i>&nbsp;     * Delete rating by id
+<i class="no-highlight">60</i>&nbsp;     */
+<i class="no-highlight">61</i>&nbsp;    public void deleteRating(Integer id, Model model) {
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        log.info(&quot;Delete rating by Id&quot; + id);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        Rating rating  = ratingRepository.findById(id).orElseThrow(() -&gt;new IllegalArgumentException(&quot;Invalid ID:&quot; + id));</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        ratingRepository.delete(rating);</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        model.addAttribute(&quot;rating&quot;, ratingRepository.findAll());</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;    }</b>
+<i class="no-highlight">67</i>&nbsp;
+<i class="no-highlight">68</i>&nbsp;
+<i class="no-highlight">69</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-15 08:26</div>
+</div>
+</body>
+</html>
