@@ -1,8 +1,8 @@
 package com.nnk.springboot;
 
 
-import org.junit.jupiter.params.ParameterizedTest;
 import com.nnk.springboot.security.PasswordValidator;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -1,14 +1,12 @@
 package com.nnk.springboot.domain;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import java.io.Serializable;
 
 @Log4j2
