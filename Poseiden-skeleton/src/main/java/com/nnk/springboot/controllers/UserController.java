@@ -53,12 +53,12 @@ public class UserController {
      * @return url user List page
      */
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) throws Exception{
+    public String validate(@Valid User user, BindingResult result, Model model) throws Exception {
 
         model.addAttribute("users", userRepository.findAll());
         if (result.hasErrors()) {
             log.error("ERROR, Add new user isn't possible");
-            return "/user/add";
+            return "/error";
         }
         PasswordValidator passwordValidator = new PasswordValidator();
         if (!passwordValidator.isValid(user.getPassword())) {

@@ -1,3 +1,4 @@
+com\nnk\springboot\ApplicationsTests.class
 com\nnk\springboot\service\BidListServiceTest.class
 com\nnk\springboot\service\TradeServiceTest.class
 com\nnk\springboot\domain\UserTest.class

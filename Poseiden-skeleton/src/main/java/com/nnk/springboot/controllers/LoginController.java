@@ -54,6 +54,16 @@ public class LoginController {
         return mav;
     }
 
+    @GetMapping("/errorUser")
+    public ModelAndView errorUser() {
+        log.error("ERROR, user already Exist");
+        ModelAndView mav = new ModelAndView();
+        String errorMessage= "ERROR, user already Exist.";
+        mav.addObject("errorMsg", errorMessage);
+        mav.setViewName("error");
+        return mav;
+    }
+
     /**
      * User log out connexion
      * @return url logout page

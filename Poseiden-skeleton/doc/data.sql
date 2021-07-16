@@ -90,7 +90,7 @@ CREATE TABLE rulename
 CREATE TABLE users
 (
     id       int auto_increment primary key,
-    username varchar(125) null,
+    username varchar(125) null unique,
     password varchar(125) null,
     fullname varchar(125) null,
     role     varchar(125) null

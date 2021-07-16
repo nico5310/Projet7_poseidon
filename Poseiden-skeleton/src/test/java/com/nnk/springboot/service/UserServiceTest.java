@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,7 +45,8 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("Validate User test")
-    public void validateUserTest() {
+    public void validateUserTest() throws Exception {
+
         //GIVEN
         User user = new User();
         user.setId(1);
@@ -51,11 +54,7 @@ public class UserServiceTest {
         user.setPassword("Poseidon1@");
         user.setFullname("admin");
         user.setRole("ADMIN");
-        //WHEN
-        when(userRepository.save(user)).thenReturn(user);
-        userService.validate(user);
-        //THEN
-        verify(userRepository).save(user);
+        assertThrows(Exception.class, () -> this.userService.validate(user));
     }
 
     @Test
@@ -70,8 +69,8 @@ public class UserServiceTest {
         user.setRole("ADMIN");
         //WHEN
         when(userRepository.findById(1)).thenReturn(Optional.of(user));
-       userService.showUpdateForm(1, new ConcurrentModel());
-       //THEN
+        userService.showUpdateForm(1, new ConcurrentModel());
+        //THEN
         verify(userRepository).findById((1));
 
     }
