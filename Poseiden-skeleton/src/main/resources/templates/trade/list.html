@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org" lang="EN">
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
@@ -25,7 +25,9 @@
 	</div>
 	<div class="row"><h2>Trade List</h2></div>
 	<div class="row">
-		<a href="/trade/add" class="btn btn-primary btn-sm">Add New</a>
+		<div class="col">
+			<a href="/trade/add" class="btn btn-primary btn-sm" style="margin-bottom: 10px">Add New</a>
+		</div>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -37,15 +39,15 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all Trade to the table, the Action column will have Edit & Delete buttons -->
-			<tr th:each="trade : ${trades}">
-				<td th:text="${trade.id}"></td>
+
+			<tr th:each="trade : ${trade}">
+				<td th:text="${trade.tradeId}"></td>
 				<td th:text="${trade.account}"></td>
 				<td th:text="${trade.type}"></td>
 				<td th:text="${trade.buyQuantity}"></td>
 				<td class="text-center">
-					<a class="btn btn-primary" href="/trade/update/{id}(id=${trade.id})">Edit</a>&nbsp;|
-					<a class="btn btn-warning" href="/trade/delete/{id}(id=${trade.id})">Delete</a>
+					<a class="btn btn-primary" th:href="@{/trade/update/{id}(id=${trade.tradeId})}">Edit</a>&nbsp;|
+					<a class="btn btn-warning" th:href="@{/trade/delete/{id}(id=${trade.tradeId})}">Delete</a>
 				</td>
 			</tr>
 			</tbody>

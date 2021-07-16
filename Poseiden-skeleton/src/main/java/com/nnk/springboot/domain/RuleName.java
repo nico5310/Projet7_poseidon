@@ -1,42 +1,51 @@
 package com.nnk.springboot.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Log4j2
+@Getter
+@Setter
 @Entity
 @Table(name = "rulename")
 public class RuleName implements Serializable {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id ;
+    Integer id;
 
     @NotNull(message = "Name not be null")
-    String name ;
+    @NotBlank(message = "template not be blank")
+    String name;
 
     @NotNull(message = "Description not be null")
-    String description ;
+    @NotBlank(message = "template not be blank")
+    String description;
 
     @NotNull(message = "Json not be null")
-    String json ;
+    @NotBlank(message = "template not be blank")
+    String json;
 
     @NotNull(message = "template not be null")
-    String template ;
+    @NotBlank(message = "template not be blank")
+    String template;
 
     @NotNull(message = "sqlStr not be null")
-    String sqlStr ;
+    @NotBlank(message = "template not be blank")
+    String sqlStr;
 
     @NotNull(message = "sqlPart not be null")
-    String sqlPart ;
+    @NotBlank(message = "template not be blank")
+    String sqlPart;
 
-    public RuleName(Integer id, String name, String description, String json, String template, String sqlStr, String sqlPart) {
+    public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
 
-        this.id          = id;
         this.name        = name;
         this.description = description;
         this.json        = json;

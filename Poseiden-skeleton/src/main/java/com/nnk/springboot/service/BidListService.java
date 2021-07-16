@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.util.Optional;
-
+/**
+ * BidList Service is CRUD methods for BidList
+ */
 @Log4j2
 @Service
 public class BidListService {
@@ -16,25 +17,36 @@ public class BidListService {
     @Autowired
     BidListRepository bidListRepository;
 
-
+    /**
+     * Show bid List
+     * @return all bidList
+     */
     public String home (Model model) {
-                log.info("Show bid list");
+        log.info("Show bidList List");
         model.addAttribute("bidList", bidListRepository.findAll());
         return "bidList/list";
     }
 
-    public void validate (BidList bid, Model model) {
+    /**
+     * Add new bid
+     */
+    public void validate(BidList bid) {
         log.info("Add new bid to bid List");
         bidListRepository.save(bid);
-        model.addAttribute("bidList", bidListRepository.findAll());
     }
 
+    /**
+     * Show update form
+     */
     public void showUpdateForm(Integer bidListId, Model model) {
         log.info("Find Bid by id to BidList");
         BidList bidList = bidListRepository.findById(bidListId).orElseThrow(() -> new IllegalArgumentException("Invalid ID:"+ bidListId));
         model.addAttribute("bidList", bidList);
     }
 
+    /**
+     * Update bid by id
+     */
     public void updateBid(Integer bidListId, BidList bidList, Model model) {
         log.info("Update exist Bid by id" + bidListId);
         bidList.setBidListId(bidListId);
@@ -42,6 +54,9 @@ public class BidListService {
         model.addAttribute("bidList",bidListRepository.findAll());
     }
 
+    /**
+     * Delete bid by id
+     */
     public void deleteBid(Integer bidListId, Model model) {
         log.info("Delete Bid by Id" + bidListId);
         BidList bidList = bidListRepository.findById(bidListId).orElseThrow(() ->new IllegalArgumentException("Invalid ID:" + bidListId));
