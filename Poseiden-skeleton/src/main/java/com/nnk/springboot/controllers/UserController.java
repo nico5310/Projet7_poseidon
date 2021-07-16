@@ -53,7 +53,7 @@ public class UserController {
      * @return url user List page
      */
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) {
+    public String validate(@Valid User user, BindingResult result, Model model) throws Exception{
 
         model.addAttribute("users", userRepository.findAll());
         if (result.hasErrors()) {

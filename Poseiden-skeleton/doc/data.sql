@@ -1,99 +1,101 @@
+CREATE TABLE bidlist
+(
+    bid_list_id    int auto_increment primary key,
+    account        varchar(125) not null,
+    type           varchar(125) not null,
+    bid_quantity   double       not null,
 
-CREATE TABLE BidList (
-  BidListId tinyint(4) NOT NULL AUTO_INCREMENT,
-  account VARCHAR(30) NOT NULL,
-  type VARCHAR(30) NOT NULL,
-  bidQuantity DOUBLE,
-  askQuantity DOUBLE,
-  bid DOUBLE ,
-  ask DOUBLE,
-  benchmark VARCHAR(125),
-  bidListDate TIMESTAMP,
-  commentary VARCHAR(125),
-  security VARCHAR(125),
-  status VARCHAR(10),
-  trader VARCHAR(125),
-  book VARCHAR(125),
-  creationName VARCHAR(125),
-  creationDate TIMESTAMP ,
-  revisionName VARCHAR(125),
-  revisionDate TIMESTAMP ,
-  dealName VARCHAR(125),
-  dealType VARCHAR(125),
-  sourceListId VARCHAR(125),
-  side VARCHAR(125),
+    ask_quantity   double       null,
+    bid            double       null,
+    ask            double       null,
+    benchmark      varchar(125) null,
+    bid_list_date  datetime     null,
+    commentary     varchar(125) null,
+    security       varchar(125) null,
+    status         varchar(125) null,
+    trader         varchar(125) null,
+    book           varchar(125) null,
+    creation_name  varchar(125) null,
+    creation_date  datetime     null,
+    revision_name  varchar(125) null,
+    revision_date  datetime     null,
+    deal_name      varchar(125) null,
+    deal_type      varchar(125) null,
+    source_list_id varchar(125) null,
+    side           varchar(125) null
+)
+    engine = MyISAM;
 
-  PRIMARY KEY (BidListId)
-);
 
-CREATE TABLE Trade (
-  TradeId tinyint(4) NOT NULL AUTO_INCREMENT,
-  account VARCHAR(30) NOT NULL,
-  type VARCHAR(30) NOT NULL,
-  buyQuantity DOUBLE,
-  sellQuantity DOUBLE,
-  buyPrice DOUBLE ,
-  sellPrice DOUBLE,
-  tradeDate TIMESTAMP,
-  security VARCHAR(125),
-  status VARCHAR(10),
-  trader VARCHAR(125),
-  benchmark VARCHAR(125),
-  book VARCHAR(125),
-  creationName VARCHAR(125),
-  creationDate TIMESTAMP ,
-  revisionName VARCHAR(125),
-  revisionDate TIMESTAMP ,
-  dealName VARCHAR(125),
-  dealType VARCHAR(125),
-  sourceListId VARCHAR(125),
-  side VARCHAR(125),
+CREATE TABLE trade
+(
+    trade_id       int auto_increment primary key,
+    account        varchar(125) not null,
+    type           varchar(125) not null,
+    buy_quantity   double       not null,
 
-  PRIMARY KEY (TradeId)
-);
+    sell_quantity  double       null,
+    buy_price      double       null,
+    sell_price     double       null,
+    benchmark      varchar(125) null,
+    trade_date     datetime     null,
+    security       varchar(125) null,
+    status         varchar(125) null,
+    trader         varchar(125) null,
+    book           varchar(125) null,
+    creation_name  varchar(125) null,
+    creation_date  datetime     null,
+    revision_name  varchar(125) null,
+    revision_date  datetime     null,
+    deal_name      varchar(125) null,
+    deal_type      varchar(125) null,
+    source_list_id varchar(125) null,
+    side           varchar(125) null
+)
+    engine = MyISAM;
 
-CREATE TABLE CurvePoint (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
-  CurveId tinyint,
-  asOfDate TIMESTAMP,
-  term DOUBLE ,
-  value DOUBLE ,
-  creationDate TIMESTAMP ,
+CREATE TABLE curvepoint
+(
+    id            int auto_increment primary key,
+    curve_id      int      not null,
+    as_of_date    datetime null,
+    term          double   not null,
+    value         double   not null,
+    creation_date datetime null
+)
+    engine = MyISAM;
 
-  PRIMARY KEY (Id)
-);
+CREATE TABLE rating
+(
+    id            int auto_increment primary key,
+    moodys_rating varchar(125) not null,
+    sandprating   varchar(125) not null,
+    fitch_rating  varchar(125) not null,
+    order_number  int          not null
+)
+    engine = MyISAM;
 
-CREATE TABLE Rating (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
-  moodysRating VARCHAR(125),
-  sandPRating VARCHAR(125),
-  fitchRating VARCHAR(125),
-  orderNumber tinyint,
+CREATE TABLE rulename
+(
+    id          int auto_increment primary key,
+    name        varchar(125) not null,
+    description varchar(125) not null,
+    json        varchar(125) not null,
+    template    varchar(125) not null,
+    sql_str     varchar(125) not null,
+    sql_part    varchar(125) not null
+)
+    engine = MyISAM;
 
-  PRIMARY KEY (Id)
-);
-
-CREATE TABLE RuleName (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
-  name VARCHAR(125),
-  description VARCHAR(125),
-  json VARCHAR(125),
-  template VARCHAR(512),
-  sqlStr VARCHAR(125),
-  sqlPart VARCHAR(125),
-
-  PRIMARY KEY (Id)
-);
-
-CREATE TABLE Users (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
-  username VARCHAR(125),
-  password VARCHAR(125),
-  fullname VARCHAR(125),
-  role VARCHAR(125),
-
-  PRIMARY KEY (Id)
-);
+CREATE TABLE users
+(
+    id       int auto_increment primary key,
+    username varchar(125) null,
+    password varchar(125) null,
+    fullname varchar(125) null,
+    role     varchar(125) null
+)
+    engine = MyISAM;
 
 #insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh
 # .sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN")
