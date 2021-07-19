@@ -48,7 +48,7 @@ public class UserIT  {
                 .build();
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("User home test")
     public void homeUserAdminTest() throws Exception {
@@ -68,7 +68,7 @@ public class UserIT  {
 
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("UserTests2")
     public void homeUserTest2() throws Exception {
@@ -77,7 +77,7 @@ public class UserIT  {
         user.setUsername("userName");
         user.setPassword("Poseidon1@");
         user.setFullname("fullName");
-        user.setRole("USER");
+        user.setRole("ADMIN");
         userRepository.save(user);
 
         mockMvc.perform(get("/user/list"))
@@ -87,7 +87,7 @@ public class UserIT  {
 
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("AddUserForm")
     public void addUserFormTest() throws Exception {
@@ -98,7 +98,7 @@ public class UserIT  {
 
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("ValidateUserList")
     public void validateUserListTest() throws Exception {
@@ -116,7 +116,7 @@ public class UserIT  {
 
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("ShowUpdateForm")
     public void showUpdateFormTest() throws Exception {
@@ -132,7 +132,7 @@ public class UserIT  {
                .andExpect(status().isOk());
     }
 
-    @WithMockUser (username = "admin", password = "Poseidon1@")
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("UpdateUser")
     public void updateUserTest() throws Exception {
@@ -156,7 +156,7 @@ public class UserIT  {
                .andExpect(model().attribute("user", Matchers.hasProperty("role", is("ADMIN"))));
     }
 
-    @WithMockUser
+    @WithMockUser (authorities = "ADMIN")
     @Test
     @DisplayName("deleteUser")
     public void deleteUserTest() throws Exception {

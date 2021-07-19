@@ -39,16 +39,11 @@ public class UserService {
     /**
      * Add new user
      */
-    public void validate (User user) throws Exception {
-        if(user.getUsername() == "") {
-            log.info("Add new user to user List");
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-        }
-        else {
-            throw  new Exception("User already exists");
-        }
+    public void validate (User user) {
+        log.info("Add new user to user List");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
 
     }
 

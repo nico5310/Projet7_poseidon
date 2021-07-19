@@ -49,13 +49,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/")
                     .permitAll()
-                    .antMatchers(HttpMethod.GET,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+                    .antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
                     .antMatchers(HttpMethod.POST,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
                     .antMatchers(HttpMethod.PUT,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
                     .antMatchers(HttpMethod.DELETE,"/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
 //                    .hasAnyAuthority("ADMIN", "USER")
-                    .antMatchers("/user/**").authenticated()
-//                    .hasAnyAuthority("ADMIN")
+                    .antMatchers("/user/**")
+                    .hasAnyAuthority("ADMIN")
                 /*
                  * Login Setup
                  */
@@ -71,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutUrl("/app-logout")
+                    .logoutSuccessUrl("/")
                     .and()
                     .exceptionHandling()
                     .accessDeniedPage("/app/error")
